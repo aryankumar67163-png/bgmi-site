@@ -351,7 +351,13 @@ input,select{
         <a class="btn" href="upi://pay?pa=7004596815-2@axl&pn=BGMI%20TOURNAMENT&cu=INR">PAY NOW</a>
     </div>
 
-    <form method="POST" action="/register">
+    <h3>Slots Left: {{ slots_left }}</h3>
+
+{% if is_full %}
+<h2 style="color:red;">MATCH FULL ❌</h2>
+{% endif %}
+
+<form method="POST" action="/register">
         <div class="form-grid">
             <input name="name" placeholder="Player Name" required>
             <input name="uid" placeholder="BGMI UID" required>
@@ -366,7 +372,11 @@ input,select{
             </select>
         </div>
 
-        <button class="btn" type="submit">SUBMIT ENTRY</button>
+        {% if is_full %}
+<button class="btn" disabled>FULL</button>
+{% else %}
+<button class="btn" type="submit">SUBMIT ENTRY</button>
+{% endif %}
     </form>
 </div>
 
