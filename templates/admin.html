@@ -1,53 +1,175 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Panel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+
 <style>
-body{background:#07101a;color:white;font-family:Arial;padding:20px}
-h1{color:#ff8a00}
-table{width:100%;border-collapse:collapse;background:#0c1724}
-th,td{border:1px solid #2b3b4c;padding:10px;font-size:14px}
-th{color:#ff8a00}
-.btn{padding:8px 12px;color:white;text-decoration:none;border-radius:5px;background:#ff8a00}
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#07101a;
+    color:white;
+}
+.header{
+    background:#09131d;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    border-bottom:1px solid #1b2b3b;
+}
+.logo{
+    font-size:24px;
+    font-weight:900;
+    color:white;
+    border:3px solid white;
+    padding:6px 10px;
+}
+.logo span{
+    display:block;
+    color:#ff8a00;
+    font-size:12px;
+}
+.btn{
+    background:linear-gradient(#ff9f1a,#ff6b00);
+    color:white;
+    border:none;
+    padding:10px 14px;
+    border-radius:6px;
+    font-weight:900;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    text-align:center;
+    margin:3px;
+}
 .delete{background:red}
+.edit{background:#2563eb}
+.success{background:green}
+.section{padding:32px}
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.title-row h1{
+    color:#ff8a00;
+}
+.card{
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
+    align-items:center;
+}
+.label{
+    color:#94a3b8;
+    font-size:11px;
+    font-weight:bold;
+}
+.value{
+    font-size:15px;
+    margin-top:5px;
+}
+.status{
+    color:#ff8a00;
+    font-weight:bold;
+}
+.actions{
+    margin-top:15px;
+}
+.empty{
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+}
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+    .header{
+        padding:14px;
+    }
+}
 </style>
 </head>
+
 <body>
 
-<h1>ADMIN PANEL</h1>
-<a class="btn" href="/">Back</a>
-<a class="btn" href="/logout">Logout</a>
+<div class="header">
+    <div class="logo">BGMI<span>ADMIN PANEL</span></div>
+    <div>
+        <a class="btn" href="/">BACK TO SITE</a>
+        <a class="btn delete" href="/logout">LOGOUT</a>
+    </div>
+</div>
 
-<br><br>
+<div class="section">
+    <div class="title-row">
+        <h1>REGISTERED PLAYERS</h1>
+        <div>Total Entries: {{ players|length }}</div>
+    </div>
 
-<table>
-<tr>
-<th>Name</th>
-<th>UID</th>
-<th>Phone</th>
-<th>Mode</th>
-<th>Payment Ref</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
+    {% if players|length == 0 %}
+    <div class="empty">
+        No player entries yet.
+    </div>
+    {% endif %}
 
-{% for p in players %}
-<tr>
-<td>{{ p.name }}</td>
-<td>{{ p.uid }}</td>
-<td>{{ p.phone }}</td>
-<td>{{ p.mode }}</td>
-<td>{{ p.payment_ref }}</td>
-<td>{{ p.paid }}</td>
-<td>
-<a class="btn" href="/mark_paid/{{ p.id }}">Mark Paid</a>
-<a class="btn delete" href="/delete/{{ p.id }}" onclick="return confirm('Delete this entry?')">Delete</a>
-</td>
-</tr>
-{% endfor %}
+    {% for p in players %}
+    <div class="card">
+        <div class="grid">
+            <div>
+                <div class="label">NAME</div>
+                <div class="value">{{ p.name }}</div>
+            </div>
 
-</table>
+            <div>
+                <div class="label">UID</div>
+                <div class="value">{{ p.uid }}</div>
+            </div>
+
+            <div>
+                <div class="label">PHONE</div>
+                <div class="value">{{ p.phone }}</div>
+            </div>
+
+            <div>
+                <div class="label">MODE</div>
+                <div class="value">{{ p.mode }}</div>
+            </div>
+
+            <div>
+                <div class="label">PAYMENT REF</div>
+                <div class="value">{{ p.payment_ref }}</div>
+            </div>
+
+            <div>
+                <div class="label">STATUS</div>
+                <div class="value status">{{ p.paid }}</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a class="btn success" href="/mark_paid/{{ p.id }}">MARK PAID</a>
+            <a class="btn edit" href="/edit/{{ p.id }}">EDIT</a>
+            <a class="btn delete" href="/delete/{{ p.id }}" onclick="return confirm('Delete this player?')">DELETE</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 </body>
 </html>
