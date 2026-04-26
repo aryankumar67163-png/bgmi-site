@@ -46,14 +46,15 @@ def register():
         return "MATCH FULL ❌"
 
     player = {
-        "id": len(players),
-        "name": request.form.get("name"),
-        "uid": request.form.get("uid"),
-        "phone": request.form.get("phone"),
-        "mode": request.form.get("mode"),
-        "payment_ref": request.form.get("payment_ref"),
-        "paid": "Pending"
-    }
+    "id": len(players),
+    "name": request.form.get("name"),
+    "uid": request.form.get("uid"),
+    "phone": request.form.get("phone"),
+    "mode": request.form.get("mode"),
+    "payment_ref": request.form.get("payment_ref"),
+    "paid": "Pending",
+    "played": "No"
+}
 
     players.append(player)
     save_data(players)
@@ -106,7 +107,7 @@ def mark_paid(player_id):
     save_data(players)
     return redirect("/admin")
 
-@app.route("/delete/<int:player_id>")
+@app.route("/delete/<int:player_id>", methods=["POST"])
 def delete(player_id):
     if not session.get("admin"):
         return redirect("/login")
@@ -119,6 +120,47 @@ def delete(player_id):
 
     save_data(players)
     return redirect("/admin")
+
+
+@app.route("/mark_played/<int:player_id>")
+def mark_played(player_id):
+    if not session.get("admin"):
+        return redirect("/login")
+
+    players = load_data()
+
+    for p in players:
+        if p["id"] == player_id:
+            p["played"] = "Yes" if p.get("played") != "Yes" else "No"
+
+    save_data(players)
+    return redirect("/admin")
+
+
+@app.route("/edit/<int:player_id>", methods=["GET", "POST"])
+def edit(player_id):
+    if not session.get("admin"):
+        return redirect("/login")
+
+    players = load_data()
+    player = next((p for p in players if p["id"] == player_id), None)
+
+    if player is None:
+        return redirect("/admin")
+
+    if request.method == "POST":
+        player["name"] = request.form.get("name")
+        player["uid"] = request.form.get("uid")
+        player["phone"] = request.form.get("phone")
+        player["mode"] = request.form.get("mode")
+        player["payment_ref"] = request.form.get("payment_ref")
+        player["paid"] = request.form.get("paid")
+        player["played"] = request.form.get("played")
+
+        save_data(players)
+        return redirect("/admin")
+
+    return render_template("edit.html", p=player)
 
 if __name__ == "__main__":
     app.run(debug=True)
