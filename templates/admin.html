@@ -156,16 +156,19 @@ body{
                 <div class="value">{{ p.payment_ref }}</div>
             </div>
 
-            <div>
-                <div class="label">STATUS</div>
-                <div class="value status">{{ p.paid }}</div>
-            </div>
+           <div>
+    <div class="label">STATUS</div>
+    <div class="value status">Paid: {{ p.paid }} | Played: {{ p.played|default('No') }}</div>
+</div>
         </div>
 
         <div class="actions">
             <a class="btn success" href="/mark_paid/{{ p.id }}">MARK PAID</a>
+            <a class="btn success" href="/mark_played/{{ p.id }}">MARK PLAYED</a>
             <a class="btn edit" href="/edit/{{ p.id }}">EDIT</a>
-            <a class="btn delete" href="/delete/{{ p.id }}" onclick="return confirm('Delete this player?')">DELETE</a>
+           <form method="POST" action="/delete/{{ p.id }}" style="display:inline;">
+    <button class="btn delete" type="submit" onclick="return confirm('Delete this player?')">DELETE</button>
+</form>
         </div>
     </div>
     {% endfor %}
