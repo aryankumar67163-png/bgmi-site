@@ -24,11 +24,26 @@ def save_data(data):
 @app.route("/")
 def home():
     players = load_data()
-    return render_template("index.html", players=players)
+    MAX_SLOTS = 100
+
+    total = len(players)
+    slots_left = MAX_SLOTS - total
+
+    return render_template(
+    "index.html",
+    players=players,
+    total=total,
+    slots_left=slots_left,
+    is_full=(total >= MAX_SLOTS)
+)
 
 @app.route("/register", methods=["POST"])
 def register():
     players = load_data()
+
+    MAX_SLOTS = 100
+    if len(players) >= MAX_SLOTS:
+        return "MATCH FULL ❌"
 
     player = {
         "id": len(players),
