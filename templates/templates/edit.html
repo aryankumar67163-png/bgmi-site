@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Player</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    background:#07101a;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+h2{
+    color:#ff8a00;
+}
+input,select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    background:#1d2a3a;
+    color:white;
+    border:none;
+}
+button{
+    padding:12px;
+    width:100%;
+    background:#ff8a00;
+    color:white;
+    border:none;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Edit Player</h2>
+
+<form method="POST">
+
+<input name="name" value="{{ p.name }}" placeholder="Name">
+<input name="uid" value="{{ p.uid }}" placeholder="UID">
+<input name="phone" value="{{ p.phone }}" placeholder="Phone">
+<input name="payment_ref" value="{{ p.payment_ref }}" placeholder="Payment Ref">
+
+<select name="mode">
+<option value="TDM" {% if p.mode=="TDM" %}selected{% endif %}>TDM</option>
+<option value="Erangel" {% if p.mode=="Erangel" %}selected{% endif %}>Erangel</option>
+<option value="Solo" {% if p.mode=="Solo" %}selected{% endif %}>Solo</option>
+<option value="Squad" {% if p.mode=="Squad" %}selected{% endif %}>Squad</option>
+</select>
+
+<select name="paid">
+<option value="Pending" {% if p.paid=="Pending" %}selected{% endif %}>Pending</option>
+<option value="Paid" {% if p.paid=="Paid" %}selected{% endif %}>Paid</option>
+</select>
+
+<select name="played">
+<option value="No" {% if p.played=="No" %}selected{% endif %}>No</option>
+<option value="Yes" {% if p.played=="Yes" %}selected{% endif %}>Yes</option>
+</select>
+
+<button>Save Changes</button>
+
+</form>
+
+</body>
+</html>
