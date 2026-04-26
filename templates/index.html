@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGMI Tournament</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#07101a;
+    color:white;
+}
+.header{
+    background:#09131d;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    border-bottom:1px solid #1b2b3b;
+}
+.logo{
+    font-size:24px;
+    font-weight:900;
+    color:white;
+    border:3px solid white;
+    padding:6px 10px;
+}
+.logo span{
+    display:block;
+    color:#ff8a00;
+    font-size:12px;
+}
+.nav{
+    display:flex;
+    gap:25px;
+    font-weight:bold;
+}
+.nav a{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+}
+.login{
+    color:#ff8a00;
+    border:1px solid #ff8a00;
+    padding:10px 18px;
+    border-radius:6px;
+}
+.hero{
+    min-height:380px;
+    background:
+    linear-gradient(90deg,rgba(5,10,18,.96),rgba(5,10,18,.45),rgba(5,10,18,.95)),
+    url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    align-items:center;
+    padding:50px;
+}
+.hero h1{
+    font-size:64px;
+    line-height:70px;
+    margin:0;
+    font-weight:900;
+}
+.orange{color:#ff8a00}
+.hero p{
+    color:#d5dce6;
+    font-size:17px;
+}
+.btn{
+    background:linear-gradient(#ff9f1a,#ff6b00);
+    color:white;
+    border:none;
+    padding:14px 24px;
+    border-radius:6px;
+    font-weight:900;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    text-align:center;
+}
+.hero-stats{
+    background:rgba(8,18,30,.90);
+    border:1px solid #263545;
+    border-radius:10px;
+    padding:22px;
+}
+.hero-stat{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    border-bottom:1px solid #283848;
+    padding:18px 0;
+}
+.hero-stat:last-child{border-bottom:none}
+.icon{font-size:36px}
+.hero-stat small{
+    color:#b9c2cf;
+    font-weight:bold;
+}
+.hero-stat h2{
+    margin:6px 0 0;
+    font-size:30px;
+}
+.section{padding:32px}
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.title-row h2{margin:0;font-size:28px}
+.view{color:#ff8a00;font-weight:bold}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+.card{
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+.card-img{
+    height:130px;
+    background-size:cover;
+    background-position:center;
+    padding:18px;
+    display:flex;
+    align-items:end;
+}
+.erangel{
+    background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.80)),url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80");
+}
+.tdm{
+    background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.80)),url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80");
+}
+.card-img h3{
+    margin:0;
+    font-size:27px;
+}
+.card-body{padding:16px}
+.tags span{
+    background:#1b2735;
+    padding:6px 10px;
+    border-radius:4px;
+    font-size:12px;
+    margin-right:5px;
+}
+.info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin:18px 0;
+}
+.info small{
+    color:#94a3b8;
+    font-size:10px;
+}
+.info b{
+    display:block;
+    font-size:18px;
+    margin-top:5px;
+}
+.card .btn{width:100%}
+.join-box{
+    max-width:800px;
+    margin:30px auto;
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    border-radius:14px;
+    padding:26px;
+}
+.join-box h2{
+    color:#ff8a00;
+    margin-top:0;
+}
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+input,select{
+    width:100%;
+    padding:15px;
+    background:#1d2a3a;
+    color:white;
+    border:none;
+    margin-bottom:12px;
+}
+.pay-box{
+    background:#101c2b;
+    border:1px solid #2b3b4c;
+    padding:16px;
+    border-radius:10px;
+    margin-bottom:16px;
+}
+.pay-box h3{
+    color:#ff8a00;
+    margin-top:0;
+}
+.players{
+    padding:30px;
+}
+.player-card{
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    border-radius:8px;
+    padding:13px;
+    margin-bottom:8px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+}
+.footer{
+    padding:25px;
+    text-align:center;
+    background:#09131d;
+    color:#cbd5e1;
+}
+@media(max-width:800px){
+    .nav,.login{display:none}
+    .hero{grid-template-columns:1fr;padding:30px}
+    .hero h1{font-size:48px;line-height:54px}
+    .hero-stats{margin-top:25px}
+    .cards{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .player-card{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">BGMI<span>TOURNAMENTS</span></div>
+    <div class="nav">
+        <a onclick="scrollToTop()">HOME</a>
+        <a onclick="scrollToTournaments()">TOURNAMENTS</a>
+        <a onclick="scrollToForm()">JOIN</a>
+        <a href="/admin">ADMIN</a>
+    </div>
+    <div class="login" onclick="scrollToForm()">LOGIN / SIGNUP</div>
+</div>
+
+<div class="hero">
+    <div>
+        <h1>PLAY.<br>COMPETE.<br><span class="orange">WIN.</span></h1>
+        <p>Join BGMI tournaments, compete with players and win prize.</p>
+        <button class="btn" type="button" onclick="joinMatch('')">JOIN TOURNAMENT</button>
+    </div>
+
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <div class="icon">🏆</div>
+            <div>
+                <small>TOTAL TOURNAMENTS</small>
+                <h2>48</h2>
+            </div>
+        </div>
+        <div class="hero-stat">
+            <div class="icon">👥</div>
+            <div>
+                <small>TOTAL PLAYERS</small>
+                <h2>{{ players|length }}</h2>
+            </div>
+        </div>
+        <div class="hero-stat">
+            <div class="icon">💰</div>
+            <div>
+                <small>TOTAL PRIZE POOL</small>
+                <h2 class="orange">₹25,000+</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" id="tournaments">
+    <div class="title-row">
+        <h2>UPCOMING TOURNAMENTS</h2>
+        <div class="view" onclick="scrollToTournaments()">VIEW ALL</div>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-img erangel"><h3>ERANGEL<br>CLASSIC</h3></div>
+            <div class="card-body">
+                <div class="tags"><span>Squad</span><span>Erangel</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹20</b></div>
+                    <div><small>PRIZE</small><b>₹1500</b></div>
+                    <div><small>SLOTS</small><b>32/100</b></div>
+                </div>
+                <button class="btn" type="button" onclick="joinMatch('Erangel')">JOIN NOW</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img tdm"><h3>TDM<br>WAREHOUSE</h3></div>
+            <div class="card-body">
+                <div class="tags"><span>TDM</span><span>Warehouse</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹15</b></div>
+                    <div><small>PRIZE</small><b>₹750</b></div>
+                    <div><small>SLOTS</small><b>25/50</b></div>
+                </div>
+                <button class="btn" type="button" onclick="joinMatch('TDM')">JOIN NOW</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img erangel"><h3>SOLO<br>CLASSIC</h3></div>
+            <div class="card-body">
+                <div class="tags"><span>Solo</span><span>Erangel</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹20</b></div>
+                    <div><small>PRIZE</small><b>₹1000</b></div>
+                    <div><small>SLOTS</small><b>40/100</b></div>
+                </div>
+                <button class="btn" type="button" onclick="joinMatch('Solo')">JOIN NOW</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img tdm"><h3>SQUAD<br>BATTLE</h3></div>
+            <div class="card-body">
+                <div class="tags"><span>Squad</span><span>Custom</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹30</b></div>
+                    <div><small>PRIZE</small><b>₹2250</b></div>
+                    <div><small>SLOTS</small><b>60/100</b></div>
+                </div>
+                <button class="btn" type="button" onclick="joinMatch('Squad')">JOIN NOW</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="join-box" id="joinForm">
+    <h2>JOIN TOURNAMENT</h2>
+
+    <div class="pay-box">
+        <h3>PAYMENT</h3>
+        <p>Click PAY NOW and pay entry fee on UPI.</p>
+        <p><b>UPI:</b> 7004596815-2@axl</p>
+        <a class="btn" href="upi://pay?pa=7004596815-2@axl&pn=BGMI%20TOURNAMENT&cu=INR">PAY NOW</a>
+    </div>
+
+    <form method="POST" action="/register">
+        <div class="form-grid">
+            <input name="name" placeholder="Player Name" required>
+            <input name="uid" placeholder="BGMI UID" required>
+            <input name="phone" placeholder="WhatsApp Number" required>
+            <input name="payment_ref" placeholder="UPI Transaction ID" required>
+            <select name="mode" id="modeSelect" required>
+                <option value="">Select Match</option>
+                <option value="TDM">TDM</option>
+                <option value="Erangel">Erangel</option>
+                <option value="Solo">Solo</option>
+                <option value="Squad">Squad</option>
+            </select>
+        </div>
+
+        <button class="btn" type="submit">SUBMIT ENTRY</button>
+    </form>
+</div>
+
+<div class="players">
+    <h2>REGISTERED PLAYERS</h2>
+
+    {% for p in players %}
+    <div class="player-card">
+        <div><b>Name:</b> {{ p.name }}</div>
+        <div><b>UID:</b> {{ p.uid }}</div>
+        <div><b>Mode:</b> {{ p.mode }}</div>
+        <div><b>Status:</b> {{ p.paid }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="footer">
+    BGMI TOURNAMENTS | Admin panel: /admin
+</div>
+
+<script>
+function joinMatch(mode){
+    document.getElementById("joinForm").scrollIntoView({behavior:"smooth"});
+    if(mode){
+        document.getElementById("modeSelect").value = mode;
+    }
+}
+function scrollToTop(){
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+function scrollToForm(){
+    document.getElementById("joinForm").scrollIntoView({behavior:"smooth"});
+}
+function scrollToTournaments(){
+    document.getElementById("tournaments").scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
