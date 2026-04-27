@@ -68,7 +68,7 @@ body{
 }
 .grid{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
+    grid-template-columns:repeat(9,1fr);
     gap:12px;
     align-items:center;
 }
@@ -150,6 +150,20 @@ body{
                 <div class="label">MODE</div>
                 <div class="value">{{ p.mode }}</div>
             </div>
+            <div>
+    <div class="label">KILLS</div>
+    <div class="value">{{ p.kills|default('0') }}</div>
+</div>
+
+<div>
+    <div class="label">RANK</div>
+    <div class="value">{{ p.rank|default('-') }}</div>
+</div>
+
+<div>
+    <div class="label">WIN RATIO</div>
+    <div class="value">{{ p.win_ratio|default('-') }}</div>
+</div>
 
             <div>
                 <div class="label">PAYMENT REF</div>
