@@ -143,24 +143,31 @@ def edit(player_id):
         return redirect("/login")
 
     players = load_data()
+
+    for p in players:
+        if "played" not in p:
+            p["played"] = "No"
+        if "paid" not in p:
+            p["paid"] = "Pending"
+
     player = next((p for p in players if p["id"] == player_id), None)
 
     if player is None:
         return redirect("/admin")
 
     if request.method == "POST":
-        player["name"] = request.form.get("name")
-        player["uid"] = request.form.get("uid")
-        player["phone"] = request.form.get("phone")
-        player["mode"] = request.form.get("mode")
-        player["payment_ref"] = request.form.get("payment_ref")
-        player["paid"] = request.form.get("paid")
-        player["played"] = request.form.get("played")
+        player["name"] = request.form.get("name") or ""
+        player["uid"] = request.form.get("uid") or ""
+        player["phone"] = request.form.get("phone") or ""
+        player["mode"] = request.form.get("mode") or ""
+        player["payment_ref"] = request.form.get("payment_ref") or ""
+        player["paid"] = request.form.get("paid") or "Pending"
+        player["played"] = request.form.get("played") or "No"
 
         save_data(players)
         return redirect("/admin")
 
     return render_template("edit.html", p=player)
-
+    
 if __name__ == "__main__":
     app.run(debug=True)
