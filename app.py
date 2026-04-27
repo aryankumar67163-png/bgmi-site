@@ -142,24 +142,25 @@ def admin():
     mode_slots, full_modes = get_mode_slots(players)
 
     total_players = len(players)
-
     paid_players = len([p for p in players if p.get("paid") == "Paid"])
     pending_players = total_players - paid_players
 
     total_collection = 0
     mode_earning = {}
 
-for p in players:
-    if p.get("paid") == "Paid":
-        mode = p.get("mode")
-        fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
-        total_collection += fee
-        if mode not in mode_earning:
-            mode_earning[mode] = 0
+    for p in players:
+        if p.get("paid") == "Paid":
+            mode = p.get("mode")
+            fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
 
-        mode_earning[mode] += fee
-   
-return render_template(
+            total_collection += fee
+
+            if mode not in mode_earning:
+                mode_earning[mode] = 0
+
+            mode_earning[mode] += fee
+
+    return render_template(
         "admin.html",
         players=players,
         mode_slots=mode_slots,
@@ -170,7 +171,6 @@ return render_template(
         total_collection=total_collection,
         mode_earning=mode_earning
     )
-
 @app.route("/mark_paid/<int:player_id>")
 def mark_paid(player_id):
     conn = get_db()
