@@ -172,7 +172,7 @@ def admin():
         mode_earning=mode_earning
     )
     
-    @app.route("/add_player", methods=["POST"])
+@app.route("/add_player", methods=["POST"])
 def add_player():
     name = request.form.get("name")
     game_id = request.form.get("game_id")
