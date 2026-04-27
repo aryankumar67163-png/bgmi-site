@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import psycopg2
 import os
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.secret_key = "secret123"
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
