@@ -10,11 +10,13 @@ FILE = "data.json"
 ADMIN_USER = "admin"
 ADMIN_PASS = "Aaryan@1999"
 
-MATCH_LIMITS = {
-    "TDM": 8,
-    "Erangel": 100,
-    "Solo": 100,
-    "Squad": 100
+MATCH_CONFIG = {
+    "TDM": {"limit": 8, "fee": 100},
+    "Erangel": {"limit": 100, "fee": 20},
+    "Solo": {"limit": 100, "fee": 20},
+    "Squad": {"limit": 100, "fee": 30},
+    "Mega TDM": {"limit": 8, "fee": 400},
+    "Mega Erangel": {"limit": 100, "fee": 100}
 }
 
 def load_data():
@@ -225,7 +227,7 @@ def edit(player_id):
         save_data(players)
         return redirect("/admin")
 
-    return render_template("edit.html", p=player, match_limits=MATCH_LIMITS)
+    return render_template("edit.html", p=player, match_config=MATCH_CONFIG)
 
 if __name__ == "__main__":
     app.run(debug=True)
