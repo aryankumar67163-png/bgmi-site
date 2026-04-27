@@ -1,48 +1,79 @@
 from flask import Flask, render_template, request, redirect, session
-import json
+import psycopg2
 import os
 
-app = Flask(__name__)
+app = Flask(_name_)
 app.secret_key = "secret123"
 
-FILE = "data.json"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
-ADMIN_USER = "admin"
-ADMIN_PASS = "Aaryan@1999"
+def get_db():
+    return psycopg2.connect(DATABASE_URL)
+
+# 🔥 TABLE CREATE
+def init_db():
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS players (
+        id SERIAL PRIMARY KEY,
+        name TEXT,
+        uid TEXT,
+        phone TEXT,
+        mode TEXT,
+        payment_ref TEXT,
+        paid TEXT,
+        played TEXT,
+        kills TEXT,
+        rank TEXT,
+        win_ratio TEXT
+    )
+    """)
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
+init_db()
 
 MATCH_CONFIG = {
-    "TDM": {"limit": 8, "fee": 100},
-    "Erangel": {"limit": 100, "fee": 20},
-    "Solo": {"limit": 100, "fee": 20},
-    "Squad": {"limit": 100, "fee": 30},
-    "Mega TDM": {"limit": 8, "fee": 400},
-    "Mega Erangel": {"limit": 100, "fee": 100}
+    "TDM": {"limit": 8},
+    "Erangel": {"limit": 100},
+    "Solo": {"limit": 100},
+    "Squad": {"limit": 100},
+    "Mega TDM": {"limit": 8},
+    "Mega Erangel": {"limit": 100}
 }
 
-def load_data():
-    if not os.path.exists(FILE):
-        with open(FILE, "w") as f:
-            json.dump([], f)
+def get_players():
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM players")
+    rows = cur.fetchall()
 
-    with open(FILE, "r") as f:
-        return json.load(f)
+    cur.close()
+    conn.close()
 
-def save_data(data):
-    with open(FILE, "w") as f:
-        json.dump(data, f, indent=4)
-
-def fix_old_data(players):
-    for i, p in enumerate(players):
-        p["id"] = i
-        p.setdefault("paid", "Pending")
-        p.setdefault("played", "No")
-        p.setdefault("kills", "0")
-        p.setdefault("rank", "")
-        p.setdefault("win_ratio", "")
+    players = []
+    for r in rows:
+        players.append({
+            "id": r[0],
+            "name": r[1],
+            "uid": r[2],
+            "phone": r[3],
+            "mode": r[4],
+            "payment_ref": r[5],
+            "paid": r[6],
+            "played": r[7],
+            "kills": r[8],
+            "rank": r[9],
+            "win_ratio": r[10]
+        })
     return players
 
 def mode_count(players, mode):
-    return len([p for p in players if p.get("mode") == mode])
+    return len([p for p in players if p["mode"] == mode])
 
 def get_mode_slots(players):
     mode_slots = {}
@@ -51,13 +82,10 @@ def get_mode_slots(players):
     for mode, cfg in MATCH_CONFIG.items():
         limit = cfg["limit"]
         used = mode_count(players, mode)
-        left = limit - used
 
         mode_slots[mode] = {
             "used": used,
-            "limit": limit,
-            "left": left,
-            "full": used >= limit
+            "limit": limit
         }
 
         if used >= limit:
@@ -67,13 +95,10 @@ def get_mode_slots(players):
 
 @app.route("/")
 def home():
-    players = fix_old_data(load_data())
-    save_data(players)
-
+    players = get_players()
     mode_slots, full_modes = get_mode_slots(players)
 
-    return render_template(
-        "index.html",
+    return render_template("index.html",
         players=players,
         mode_slots=mode_slots,
         full_modes=full_modes
@@ -81,148 +106,100 @@ def home():
 
 @app.route("/register", methods=["POST"])
 def register():
-    players = fix_old_data(load_data())
+    conn = get_db()
+    cur = conn.cursor()
 
-    mode = request.form.get("mode")
-    limit = MATCH_CONFIG.get(mode, {"limit": 100})["limit"]
+    cur.execute("""
+    INSERT INTO players (name, uid, phone, mode, payment_ref, paid, played, kills, rank, win_ratio)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+    """, (
+        request.form.get("name"),
+        request.form.get("uid"),
+        request.form.get("phone"),
+        request.form.get("mode"),
+        request.form.get("payment_ref"),
+        "Pending",
+        "No",
+        "0",
+        "",
+        ""
+    ))
 
-    if mode_count(players, mode) >= limit:
-        return f"{mode} SLOT FULL ❌"
-
-    player = {
-        "id": len(players),
-        "name": request.form.get("name"),
-        "uid": request.form.get("uid"),
-        "phone": request.form.get("phone"),
-        "mode": mode,
-        "payment_ref": request.form.get("payment_ref"),
-        "paid": "Pending",
-        "played": "No",
-        "kills": "0",
-        "rank": "",
-        "win_ratio": ""
-    }
-
-    players.append(player)
-    save_data(players)
+    conn.commit()
+    cur.close()
+    conn.close()
 
     return redirect("/")
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        user = request.form.get("username")
-        password = request.form.get("password")
-
-        if user == ADMIN_USER and password == ADMIN_PASS:
-            session["admin"] = True
-            return redirect("/admin")
-
-    return '''
-    <h2>Admin Login</h2>
-    <form method="POST">
-        Username: <input name="username"><br><br>
-        Password: <input type="password" name="password"><br><br>
-        <button>Login</button>
-    </form>
-    '''
 
 @app.route("/admin")
 def admin():
     if not session.get("admin"):
         return redirect("/login")
 
-    players = fix_old_data(load_data())
-    save_data(players)
-
+    players = get_players()
     mode_slots, full_modes = get_mode_slots(players)
 
-    return render_template(
-        "admin.html",
+    return render_template("admin.html",
         players=players,
         mode_slots=mode_slots,
         full_modes=full_modes
     )
+
+@app.route("/mark_paid/<int:player_id>")
+def mark_paid(player_id):
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("UPDATE players SET paid='Paid' WHERE id=%s", (player_id,))
+    conn.commit()
+
+    cur.close()
+    conn.close()
+    return redirect("/admin")
+
+@app.route("/mark_played/<int:player_id>")
+def mark_played(player_id):
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("UPDATE players SET played='Yes' WHERE id=%s", (player_id,))
+    conn.commit()
+
+    cur.close()
+    conn.close()
+    return redirect("/admin")
+
+@app.route("/delete/<int:player_id>", methods=["POST"])
+def delete(player_id):
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("DELETE FROM players WHERE id=%s", (player_id,))
+    conn.commit()
+
+    cur.close()
+    conn.close()
+    return redirect("/admin")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        if request.form.get("username") == "admin" and request.form.get("password") == "Aaryan@1999":
+            session["admin"] = True
+            return redirect("/admin")
+
+    return '''
+    <form method="POST">
+    <input name="username">
+    <input type="password" name="password">
+    <button>Login</button>
+    </form>
+    '''
 
 @app.route("/logout")
 def logout():
     session.pop("admin", None)
     return redirect("/login")
 
-@app.route("/mark_paid/<int:player_id>")
-def mark_paid(player_id):
-    if not session.get("admin"):
-        return redirect("/login")
-
-    players = fix_old_data(load_data())
-
-    for p in players:
-        if p["id"] == player_id:
-            p["paid"] = "Paid"
-
-    save_data(players)
-    return redirect("/admin")
-
-@app.route("/mark_played/<int:player_id>")
-def mark_played(player_id):
-    if not session.get("admin"):
-        return redirect("/login")
-
-    players = fix_old_data(load_data())
-
-    for p in players:
-        if p["id"] == player_id:
-            p["played"] = "Yes" if p.get("played") != "Yes" else "No"
-
-    save_data(players)
-    return redirect("/admin")
-
-@app.route("/delete/<int:player_id>", methods=["POST"])
-def delete(player_id):
-    if not session.get("admin"):
-        return redirect("/login")
-
-    players = fix_old_data(load_data())
-    players = [p for p in players if p["id"] != player_id]
-    players = fix_old_data(players)
-
-    save_data(players)
-    return redirect("/admin")
-
-@app.route("/edit/<int:player_id>", methods=["GET", "POST"])
-def edit(player_id):
-    if not session.get("admin"):
-        return redirect("/login")
-
-    players = fix_old_data(load_data())
-    player = next((p for p in players if p["id"] == player_id), None)
-
-    if player is None:
-        return redirect("/admin")
-
-    if request.method == "POST":
-        old_mode = player.get("mode")
-        new_mode = request.form.get("mode")
-        limit = MATCH_CONFIG.get(new_mode, {"limit": 100})["limit"]
-
-        if old_mode != new_mode and mode_count(players, new_mode) >= limit:
-            return f"{new_mode} SLOT FULL ❌"
-
-        player["name"] = request.form.get("name") or ""
-        player["uid"] = request.form.get("uid") or ""
-        player["phone"] = request.form.get("phone") or ""
-        player["mode"] = new_mode or ""
-        player["payment_ref"] = request.form.get("payment_ref") or ""
-        player["paid"] = request.form.get("paid") or "Pending"
-        player["played"] = request.form.get("played") or "No"
-        player["kills"] = request.form.get("kills") or "0"
-        player["rank"] = request.form.get("rank") or ""
-        player["win_ratio"] = request.form.get("win_ratio") or ""
-
-        save_data(players)
-        return redirect("/admin")
-
-    return render_template("edit.html", p=player, match_config=MATCH_CONFIG)
-
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True)
