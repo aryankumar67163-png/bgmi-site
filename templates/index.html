@@ -157,22 +157,30 @@ body{
     box-shadow:0 0 25px rgba(255,138,0,.35);
 }
 .card-img{
-    height:130px;
+    height:150px;
     background-size:cover;
     background-position:center;
     padding:18px;
     display:flex;
     align-items:end;
+    position:relative;
 }
-.erangel{
+.card-img::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.85));
+}
+.card-img h3{
+    position:relative;
+    z-index:2;
+    text-shadow:0 0 12px rgba(255,138,0,.9);
+}
+    .erangel{
     background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.80)),url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80");
 }
 .tdm{
     background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.80)),url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80");
-}
-.card-img h3{
-    margin:0;
-    font-size:27px;
 }
 .card-body{padding:16px}
 .tags span{
