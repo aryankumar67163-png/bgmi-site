@@ -6,7 +6,9 @@ app = Flask(__name__)
 app.secret_key = "secret123"
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
-
+if not DATABASE_URL:
+    raise Exception("DATABASE_URL not set")
+    
 def get_db():
     return psycopg.connect(DATABASE_URL)
 
