@@ -60,7 +60,16 @@ button{
 <option value="No" {% if p.played=="No" %}selected{% endif %}>No</option>
 <option value="Yes" {% if p.played=="Yes" %}selected{% endif %}>Yes</option>
 </select>
+<input name="kills" value="{{ p.kills|default('0') }}" placeholder="Kills">
 
+<select name="rank">
+    <option value="">Select Rank</option>
+    <option value="1" {% if p.rank=="1" %}selected{% endif %}>1</option>
+    <option value="2" {% if p.rank=="2" %}selected{% endif %}>2</option>
+    <option value="3" {% if p.rank=="3" %}selected{% endif %}>3</option>
+</select>
+
+<input name="win_ratio" value="{{ p.win_ratio|default('') }}" placeholder="Win Ratio">
 <button>Save Changes</button>
 
 </form>
