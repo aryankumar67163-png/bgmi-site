@@ -435,7 +435,11 @@ input,select{
                     <div><small>PRIZE</small><b>₹1500</b></div>
                     <div><small>SLOTS</small><b>{{ mode_slots['Erangel'].used }}/{{ mode_slots['Erangel'].limit }}</b></div>
                 </div>
-                <button class="btn" type="button" onclick="joinMatch('Erangel')">JOIN NOW</button>
+               {% if mode_slots['Erangel'].used >= mode_slots['Erangel'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Erangel')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
 
@@ -455,7 +459,11 @@ input,select{
                     <div><small>PRIZE</small><b>₹160 / PLAYER</b></div>
                     <div><small>SLOTS</small><b>{{ mode_slots['TDM'].used }}/{{ mode_slots['TDM'].limit }}</b></div>
                 </div>
-                <button class="btn" type="button" onclick="joinMatch('TDM')">JOIN NOW</button>
+               {% if mode_slots['TDM'].used >= mode_slots['TDM'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('TDM')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
 
@@ -475,7 +483,11 @@ input,select{
                     <div><small>PRIZE</small><b>₹1000</b></div>
                     <div><small>SLOTS</small><b>{{ mode_slots['Solo'].used }}/{{ mode_slots['Solo'].limit }}</b></div>
                 </div>
-                <button class="btn" type="button" onclick="joinMatch('Solo')">JOIN NOW</button>
+               {% if mode_slots['Solo'].used >= mode_slots['Solo'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Solo')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
 
@@ -495,7 +507,11 @@ input,select{
                     <div><small>PRIZE</small><b>₹2250</b></div>
                     <div><small>SLOTS</small><b>{{ mode_slots['Squad'].used }}/{{ mode_slots['Squad'].limit }}</b></div>
                 </div>
-                <button class="btn" type="button" onclick="joinMatch('Squad')">JOIN NOW</button>
+               {% if mode_slots['Squad'].used >= mode_slots['Squad'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Squad')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
 
@@ -515,7 +531,11 @@ input,select{
                     <div><small>PRIZE</small><b>₹7500</b></div>
                     <div><small>SLOTS</small><b>{{ mode_slots['Mega Erangel'].used }}/{{ mode_slots['Mega Erangel'].limit }}</b></div>
                 </div>
-                <button class="btn" type="button" onclick="joinMatch('Mega Erangel')">JOIN NOW</button>
+                {% if mode_slots['Mega Erangel'].used >= mode_slots['Mega Erangel'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Mega Erangel')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
 
@@ -535,7 +555,11 @@ input,select{
                     <div><small>PRIZE</small><b>₹600 / PLAYER</b></div>
                     <div><small>SLOTS</small><b>{{ mode_slots['Mega TDM'].used }}/{{ mode_slots['Mega TDM'].limit }}</b></div>
                 </div>
-                <button class="btn" type="button" onclick="joinMatch('Mega TDM')">JOIN NOW</button>
+               {% if mode_slots['Mega TDM'].used >= mode_slots['Mega TDM'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Mega TDM')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
     </div>
