@@ -137,6 +137,22 @@ body{
         <h2>₹{{ total_collection }}</h2>
     </div>
 </div>
+    <h2>Mode Wise Earnings</h2>
+
+<table border="1" style="width:100%;margin-top:10px">
+<tr>
+    <th>Mode</th>
+    <th>Earning</th>
+</tr>
+
+{% for m, e in mode_earning.items() %}
+<tr>
+    <td>{{ m }}</td>
+    <td>₹{{ e }}</td>
+</tr>
+{% endfor %}
+
+</table>
 
 <div class="section">
 
