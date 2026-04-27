@@ -141,10 +141,27 @@ def admin():
     players = get_players()
     mode_slots, full_modes = get_mode_slots(players)
 
-    return render_template("admin.html",
+    total_players = len(players)
+
+    paid_players = len([p for p in players if p.get("paid") == "Paid"])
+    pending_players = total_players - paid_players
+
+    total_collection = 0
+    for p in players:
+        if p.get("paid") == "Paid":
+            mode = p.get("mode")
+            fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
+            total_collection += fee
+
+    return render_template(
+        "admin.html",
         players=players,
         mode_slots=mode_slots,
-        full_modes=full_modes
+        full_modes=full_modes,
+        total_players=total_players,
+        paid_players=paid_players,
+        pending_players=pending_players,
+        total_collection=total_collection
     )
 
 @app.route("/mark_paid/<int:player_id>")
