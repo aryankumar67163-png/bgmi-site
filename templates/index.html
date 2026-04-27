@@ -352,10 +352,10 @@ input,select{
         <a class="btn" href="upi://pay?pa=7004596815-2@axl&pn=BGMI%20TOURNAMENT&cu=INR">PAY NOW</a>
     </div>
 
-    <h3>Slots Left: {{ slots_left }}</h3>
+    <h3>Select match to check slots</h3>
 
-{% if is_full %}
-<h2 style="color:red;">MATCH FULL ❌</h2>
+{% if full_modes %}
+<h2 style="color:red;">FULL: {{ full_modes|join(', ') }}</h2>
 {% endif %}
 
 <form method="POST" action="/register">
@@ -373,11 +373,8 @@ input,select{
             </select>
         </div>
 
-        {% if is_full %}
-<button class="btn" disabled>FULL</button>
-{% else %}
+
 <button class="btn" type="submit">SUBMIT ENTRY</button>
-{% endif %}
     </form>
 </div>
 
