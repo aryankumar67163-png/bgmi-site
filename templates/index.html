@@ -318,6 +318,25 @@ input,select{
     text-decoration:none;
     color:white;
 }
+    .badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:5px 10px;
+    font-size:12px;
+    font-weight:bold;
+    border-radius:4px;
+}
+
+.full{
+    background:red;
+    color:white;
+}
+
+.live{
+    background:limegreen;
+    color:black;
+}
 </style>
 </head>
 
@@ -401,7 +420,14 @@ input,select{
 
     <div class="cards">
         <div class="card">
-            <div class="card-img erangel"><h3>ERANGEL<br>CLASSIC</h3></div>
+            <div class="card-img erangel">
+    {% if mode_slots['Erangel'].used >= mode_slots['Erangel'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>ERANGEL<br>CLASSIC</h3>
+</div>
             <div class="card-body">
                 <div class="tags"><span>Squad</span><span>Erangel</span></div>
                 <div class="info">
@@ -414,7 +440,14 @@ input,select{
         </div>
 
         <div class="card">
-            <div class="card-img tdm"><h3>TDM<br>WAREHOUSE</h3></div>
+            <div class="card-img tdm">
+    {% if mode_slots['TDM'].used >= mode_slots['TDM'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>TDM<br>WAREHOUSE</h3>
+</div>
             <div class="card-body">
                 <div class="tags"><span>TDM</span><span>Warehouse</span></div>
                 <div class="info">
@@ -427,7 +460,14 @@ input,select{
         </div>
 
         <div class="card">
-            <div class="card-img erangel"><h3>SOLO<br>CLASSIC</h3></div>
+            <div class="card-img erangel">
+    {% if mode_slots['Solo'].used >= mode_slots['Solo'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>SOLO<br>CLASSIC</h3>
+</div>
             <div class="card-body">
                 <div class="tags"><span>Solo</span><span>Erangel</span></div>
                 <div class="info">
@@ -440,7 +480,14 @@ input,select{
         </div>
 
         <div class="card">
-            <div class="card-img tdm"><h3>SQUAD<br>BATTLE</h3></div>
+            <div class="card-img erangel">
+    {% if mode_slots['Squad'].used >= mode_slots['Squad'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>SQUAD<br>BATTLE</h3>
+</div>
             <div class="card-body">
                 <div class="tags"><span>Squad</span><span>Custom</span></div>
                 <div class="info">
@@ -453,7 +500,14 @@ input,select{
         </div>
 
         <div class="card">
-            <div class="card-img erangel"><h3>MEGA<br>ERANGEL</h3></div>
+           <div class="card-img erangel">
+    {% if mode_slots['Mega Erangel'].used >= mode_slots['Mega Erangel'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>MEGA<br>ERANGEL</h3>
+</div>
             <div class="card-body">
                 <div class="tags"><span>Mega</span><span>Erangel</span></div>
                 <div class="info">
@@ -466,7 +520,14 @@ input,select{
         </div>
 
         <div class="card">
-            <div class="card-img tdm"><h3>MEGA<br>TDM</h3></div>
+           <div class="card-img tdm">
+    {% if mode_slots['Mega TDM'].used >= mode_slots['Mega TDM'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>MEGA<br>TDM</h3>
+</div>
             <div class="card-body">
                 <div class="tags"><span>Mega</span><span>TDM</span></div>
                 <div class="info">
