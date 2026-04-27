@@ -38,6 +38,8 @@ body{
     color:white;
     border:3px solid white;
     padding:6px 10px;
+    box-shadow:0 0 15px rgba(255,138,0,.45);
+    border-radius:8px;
 }
 .logo span{
     display:block;
@@ -84,16 +86,22 @@ body{
     font-size:17px;
 }
 .btn{
-    background:linear-gradient(#ff9f1a,#ff6b00);
+    background:linear-gradient(135deg,#ff9f1a,#ff5a00);
     color:white;
     border:none;
     padding:14px 24px;
-    border-radius:6px;
+    border-radius:8px;
     font-weight:900;
     cursor:pointer;
     text-decoration:none;
     display:inline-block;
     text-align:center;
+    box-shadow:0 0 18px rgba(255,106,0,.45);
+    transition:.25s;
+}
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 28px rgba(255,106,0,.8);
 }
 .hero-stats{
     background:rgba(8,18,30,.90);
@@ -133,11 +141,17 @@ body{
     gap:18px;
 }
 .card{
-    background:#0c1724;
+    background:linear-gradient(180deg,#101d2c,#0c1724);
     border:1px solid #2b3b4c;
-    border-radius:10px;
+    border-radius:14px;
     overflow:hidden;
     box-shadow:0 12px 30px rgba(0,0,0,.35);
+    transition:.25s;
+}
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#ff8a00;
+    box-shadow:0 0 25px rgba(255,138,0,.35);
 }
 .card-img{
     height:130px;
