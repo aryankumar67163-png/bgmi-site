@@ -171,6 +171,26 @@ def admin():
         total_collection=total_collection,
         mode_earning=mode_earning
     )
+    
+    @app.route("/add_player", methods=["POST"])
+def add_player():
+    name = request.form.get("name")
+    game_id = request.form.get("game_id")
+    mode = request.form.get("mode")
+
+    players = get_players()
+
+    players.append({
+        "name": name,
+        "game_id": game_id,
+        "mode": mode,
+        "paid": "Pending"
+    })
+
+    save_players(players)
+
+    return redirect("/")
+    
 @app.route("/mark_paid/<int:player_id>")
 def mark_paid(player_id):
     conn = get_db()
