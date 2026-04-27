@@ -34,16 +34,11 @@ def save_data(data):
 def fix_old_data(players):
     for i, p in enumerate(players):
         p["id"] = i
-        if "paid" not in p:
-            p["paid"] = "Pending"
-        if "played" not in p:
-            p["played"] = "No"
-        if "kills" not in p:
-            p["kills"] = "0"
-        if "rank" not in p:
-            p["rank"] = ""
-        if "win_ratio" not in p:
-            p["win_ratio"] = ""
+        p.setdefault("paid", "Pending")
+        p.setdefault("played", "No")
+        p.setdefault("kills", "0")
+        p.setdefault("rank", "")
+        p.setdefault("win_ratio", "")
     return players
 
 def mode_count(players, mode):
@@ -53,7 +48,8 @@ def get_mode_slots(players):
     mode_slots = {}
     full_modes = []
 
-    for mode, limit in MATCH_LIMITS.items():
+    for mode, cfg in MATCH_CONFIG.items():
+        limit = cfg["limit"]
         used = mode_count(players, mode)
         left = limit - used
 
@@ -88,7 +84,7 @@ def register():
     players = fix_old_data(load_data())
 
     mode = request.form.get("mode")
-    limit = MATCH_LIMITS.get(mode, 100)
+    limit = MATCH_CONFIG.get(mode, {"limit": 100})["limit"]
 
     if mode_count(players, mode) >= limit:
         return f"{mode} SLOT FULL ❌"
@@ -188,10 +184,9 @@ def delete(player_id):
 
     players = fix_old_data(load_data())
     players = [p for p in players if p["id"] != player_id]
-
     players = fix_old_data(players)
-    save_data(players)
 
+    save_data(players)
     return redirect("/admin")
 
 @app.route("/edit/<int:player_id>", methods=["GET", "POST"])
@@ -208,7 +203,7 @@ def edit(player_id):
     if request.method == "POST":
         old_mode = player.get("mode")
         new_mode = request.form.get("mode")
-        limit = MATCH_LIMITS.get(new_mode, 100)
+        limit = MATCH_CONFIG.get(new_mode, {"limit": 100})["limit"]
 
         if old_mode != new_mode and mode_count(players, new_mode) >= limit:
             return f"{new_mode} SLOT FULL ❌"
