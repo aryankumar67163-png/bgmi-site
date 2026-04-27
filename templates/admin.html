@@ -116,6 +116,30 @@ body{
     </div>
 </div>
 
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:20px 0;">
+    <div style="background:#111;padding:15px;border-radius:8px;text-align:center;">
+        <small>Total Players</small>
+        <h2>{{ total_players }}</h2>
+    </div>
+
+    <div style="background:#0a3d2e;padding:15px;border-radius:8px;text-align:center;">
+        <small>Paid</small>
+        <h2>{{ paid_players }}</h2>
+    </div>
+
+    <div style="background:#3d0a0a;padding:15px;border-radius:8px;text-align:center;">
+        <small>Pending</small>
+        <h2>{{ pending_players }}</h2>
+    </div>
+
+    <div style="background:#2c2c2c;padding:15px;border-radius:8px;text-align:center;">
+        <small>Total Collection</small>
+        <h2>₹{{ total_collection }}</h2>
+    </div>
+</div>
+
+<div class="section">
+
 <div class="section">
     <div class="title-row">
         <h1>REGISTERED PLAYERS</h1>
