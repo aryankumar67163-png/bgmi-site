@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
-import psycopg2
+import psycopg
 import os
 
 app = Flask(__name__)
@@ -8,7 +8,7 @@ app.secret_key = "secret123"
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
-    return psycopg2.connect(DATABASE_URL)
+    return psycopg.connect(DATABASE_URL)
 
 # 🔥 TABLE CREATE
 def init_db():
