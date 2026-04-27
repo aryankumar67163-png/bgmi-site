@@ -295,7 +295,7 @@ input,select{
                 <div class="info">
                     <div><small>ENTRY</small><b>₹20</b></div>
                     <div><small>PRIZE</small><b>₹1500</b></div>
-                    <div><small>SLOTS</small><b>{{ total }}/100</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Erangel'].used }}/{{ mode_slots['Erangel'].limit }}</b></div>
                 </div>
                 <button class="btn" type="button" onclick="joinMatch('Erangel')">JOIN NOW</button>
             </div>
@@ -308,7 +308,7 @@ input,select{
                 <div class="info">
                     <div><small>ENTRY</small><b>₹15</b></div>
                     <div><small>PRIZE</small><b>₹750</b></div>
-                    <div><small>SLOTS</small><b>{{ total }}/100</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['TDM'].used }}/{{ mode_slots['TDM'].limit }}</b></div>
                 </div>
                 <button class="btn" type="button" onclick="joinMatch('TDM')">JOIN NOW</button>
             </div>
@@ -321,7 +321,7 @@ input,select{
                 <div class="info">
                     <div><small>ENTRY</small><b>₹20</b></div>
                     <div><small>PRIZE</small><b>₹1000</b></div>
-                    <div><small>SLOTS</small><b>{{ total }}/100</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Solo'].used }}/{{ mode_slots['Solo'].limit }}</b></div>
                 </div>
                 <button class="btn" type="button" onclick="joinMatch('Solo')">JOIN NOW</button>
             </div>
@@ -334,7 +334,7 @@ input,select{
                 <div class="info">
                     <div><small>ENTRY</small><b>₹30</b></div>
                     <div><small>PRIZE</small><b>₹2250</b></div>
-                    <div><small>SLOTS</small><b>{{ total }}/100</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Squad'].used }}/{{ mode_slots['Squad'].limit }}</b></div>
                 </div>
                 <button class="btn" type="button" onclick="joinMatch('Squad')">JOIN NOW</button>
             </div>
