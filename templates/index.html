@@ -352,7 +352,22 @@ input,select{
     </div>
     <div class="login" onclick="scrollToForm()">LOGIN / SIGNUP</div>
 </div>
+<h2>Register Player</h2>
 
+<form action="/add_player" method="POST" style="margin-bottom:20px">
+
+    <input name="name" placeholder="Player Name" required><br><br>
+
+    <input name="game_id" placeholder="Game ID" required><br><br>
+
+    <select name="mode">
+        <option value="Solo">Solo</option>
+        <option value="Duo">Duo</option>
+        <option value="Squad">Squad</option>
+    </select><br><br>
+
+    <button type="submit">Add Player</button>
+</form>
 <div class="alert-banner">
     This is an unofficial BGMI tournament platform.<br>
     We are not affiliated with Krafton.<br>
