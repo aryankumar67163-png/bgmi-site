@@ -139,6 +139,19 @@ def admin():
         return redirect("/login")
 
     players = get_players()
+    search = request.args.get("search", "").lower()
+status_filter = request.args.get("status", "")
+mode_filter = request.args.get("mode", "")
+
+if search:
+    players = [p for p in players if search in p.get("name", "").lower() or search in p.get("game_id", "").lower()]
+
+if status_filter:
+    players = [p for p in players if p.get("paid") == status_filter]
+
+if mode_filter:
+    players = [p for p in players if p.get("mode") == mode_filter]
+    
     mode_slots, full_modes = get_mode_slots(players)
 
     total_players = len(players)
