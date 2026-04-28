@@ -173,7 +173,7 @@ if mode_filter:
 
             mode_earning[mode] += fee
 
-    return render_template(
+               return render_template(
         "admin.html",
         players=players,
         mode_slots=mode_slots,
