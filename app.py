@@ -161,29 +161,29 @@ if mode_filter:
     total_collection = 0
     mode_earning = {}
 
-    for p in players:
-        if p.get("paid") == "Paid":
-            mode = p.get("mode")
-            fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
+for p in players:
+    if p.get("paid") == "Paid":
+        mode = p.get("mode")
+        fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
 
-            total_collection += fee
+        total_collection += fee
 
-            if mode not in mode_earning:
-                mode_earning[mode] = 0
+        if mode not in mode_earning:
+            mode_earning[mode] = 0
 
-            mode_earning[mode] += fee
+        mode_earning[mode] += fee
 
-               return render_template(
-        "admin.html",
-        players=players,
-        mode_slots=mode_slots,
-        full_modes=full_modes,
-        total_players=total_players,
-        paid_players=paid_players,
-        pending_players=pending_players,
-        total_collection=total_collection,
-        mode_earning=mode_earning
-    )
+return render_template(
+    "admin.html",
+    players=players,
+    mode_slots=mode_slots,
+    full_modes=full_modes,
+    total_players=total_players,
+    paid_players=paid_players,
+    pending_players=pending_players,
+    total_collection=total_collection,
+    mode_earning=mode_earning
+)
     
 @app.route("/add_player", methods=["POST"])
 def add_player():
