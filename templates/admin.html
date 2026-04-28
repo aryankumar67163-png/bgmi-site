@@ -159,8 +159,30 @@ body{
 <div class="section">
     <div class="title-row">
         <h1>REGISTERED PLAYERS</h1>
-        <div>Total Entries: {{ players|length }}</div>
-    </div>
+
+<form method="GET" action="/admin" style="display:flex;gap:10px;margin:20px 0;flex-wrap:wrap;">  
+    <input type="text" name="search" placeholder="Search name or UID" style="padding:10px;">  
+  
+    <select name="status" style="padding:10px;">  
+        <option value="">All Status</option>  
+        <option value="Paid">Paid</option>  
+        <option value="Pending">Pending</option>  
+    </select>  
+  
+    <select name="mode" style="padding:10px;">  
+        <option value="">All Modes</option>  
+        <option value="Solo">Solo</option>  
+        <option value="Duo">Duo</option>  
+        <option value="Squad">Squad</option>  
+        <option value="TDM">TDM</option>  
+        <option value="Erangel">Erangel</option>  
+    </select>  
+  
+    <button class="btn" type="submit">Filter</button>  
+    <a class="btn delete" href="/admin">Clear</a>  
+</form>
+
+<div>Total Entries: {{ players|length }}</div>
 
     {% if players|length == 0 %}
     <div class="empty">
