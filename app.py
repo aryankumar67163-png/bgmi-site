@@ -139,19 +139,20 @@ def admin():
         return redirect("/login")
 
     players = get_players()
+
     search = request.args.get("search", "").lower()
-status_filter = request.args.get("status", "")
-mode_filter = request.args.get("mode", "")
+    status_filter = request.args.get("status", "")
+    mode_filter = request.args.get("mode", "")
 
-if search:
-    players = [p for p in players if search in p.get("name", "").lower() or search in p.get("game_id", "").lower()]
+    if search:
+        players = [p for p in players if search in p.get("name", "").lower()]
 
-if status_filter:
-    players = [p for p in players if p.get("paid") == status_filter]
+    if status_filter:
+        players = [p for p in players if p.get("paid") == status_filter]
 
-if mode_filter:
-    players = [p for p in players if p.get("mode") == mode_filter]
-    
+    if mode_filter:
+        players = [p for p in players if p.get("mode") == mode_filter]
+
     mode_slots, full_modes = get_mode_slots(players)
 
     total_players = len(players)
@@ -161,29 +162,29 @@ if mode_filter:
     total_collection = 0
     mode_earning = {}
 
-for p in players:
-    if p.get("paid") == "Paid":
-        mode = p.get("mode")
-        fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
+    for p in players:
+        if p.get("paid") == "Paid":
+            mode = p.get("mode")
+            fee = MATCH_CONFIG.get(mode, {}).get("fee", 0)
 
-        total_collection += fee
+            total_collection += fee
 
-        if mode not in mode_earning:
-            mode_earning[mode] = 0
+            if mode not in mode_earning:
+                mode_earning[mode] = 0
 
-        mode_earning[mode] += fee
+            mode_earning[mode] += fee
 
-return render_template(
-    "admin.html",
-    players=players,
-    mode_slots=mode_slots,
-    full_modes=full_modes,
-    total_players=total_players,
-    paid_players=paid_players,
-    pending_players=pending_players,
-    total_collection=total_collection,
-    mode_earning=mode_earning
-)
+    return render_template(
+        "admin.html",
+        players=players,
+        mode_slots=mode_slots,
+        full_modes=full_modes,
+        total_players=total_players,
+        paid_players=paid_players,
+        pending_players=pending_players,
+        total_collection=total_collection,
+        mode_earning=mode_earning
+    )
     
 @app.route("/add_player", methods=["POST"])
 def add_player():
