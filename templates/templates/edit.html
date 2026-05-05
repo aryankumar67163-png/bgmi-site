@@ -6,50 +6,29 @@
 <style>
 body{background:#07101a;color:white;font-family:Arial;padding:20px}
 h2{color:#ff8a00}
-input,select{width:100%;padding:12px;margin:10px 0;background:#1d2a3a;color:white;border:none}
+input{width:100%;padding:12px;margin:10px 0;background:#1d2a3a;color:white;border:none}
 button{width:100%;padding:12px;background:#ff8a00;color:white;border:none;font-weight:bold}
 a{color:#ff8a00}
 </style>
 </head>
 <body>
 
-<h2>Edit Player</h2>
+<h2>Edit Player: {{ p.name }}</h2>
 
 <form method="POST">
-    <input name="name" value="{{ p.get('name','') }}" placeholder="Name">
-    <input name="uid" value="{{ p.get('uid','') }}" placeholder="UID">
-    <input name="phone" value="{{ p.get('phone','') }}" placeholder="Phone">
-    <input name="payment_ref" value="{{ p.get('payment_ref','') }}" placeholder="Payment Ref">
 
-    <select name="mode">
-        <option value="TDM" {% if p.get('mode') == 'TDM' %}selected{% endif %}>TDM</option>
-        <option value="Erangel" {% if p.get('mode') == 'Erangel' %}selected{% endif %}>Erangel</option>
-        <option value="Solo" {% if p.get('mode') == 'Solo' %}selected{% endif %}>Solo</option>
-        <option value="Squad" {% if p.get('mode') == 'Squad' %}selected{% endif %}>Squad</option>
-    </select>
+    <p>Kills:</p>
+    <input name="kills" value="{{ p.kills }}">
 
-    <select name="paid">
-        <option value="Pending" {% if p.get('paid') == 'Pending' %}selected{% endif %}>Pending</option>
-        <option value="Paid" {% if p.get('paid') == 'Paid' %}selected{% endif %}>Paid</option>
-    </select>
+    <p>Rank:</p>
+    <input name="rank" value="{{ p.rank }}">
 
-    <select name="played">
-        <option value="No" {% if p.get('played','No') == 'No' %}selected{% endif %}>No</option>
-        <option value="Yes" {% if p.get('played') == 'Yes' %}selected{% endif %}>Yes</option>
-    </select>
+    <p>Win Ratio:</p>
+    <input name="win_ratio" value="{{ p.win_ratio }}">
 
-    <input name="kills" value="{{ p.get('kills','0') }}" placeholder="Kills">
+    <br>
+    <button type="submit">UPDATE</button>
 
-    <select name="rank">
-        <option value="">Select Rank</option>
-        <option value="1" {% if p.get('rank') == '1' %}selected{% endif %}>1</option>
-        <option value="2" {% if p.get('rank') == '2' %}selected{% endif %}>2</option>
-        <option value="3" {% if p.get('rank') == '3' %}selected{% endif %}>3</option>
-    </select>
-
-    <input name="win_ratio" value="{{ p.get('win_ratio','') }}" placeholder="Win Ratio">
-
-    <button type="submit">Save Changes</button>
 </form>
 
 <br>
