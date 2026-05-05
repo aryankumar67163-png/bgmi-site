@@ -4,183 +4,248 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BGMI Admin Panel</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box}
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background:#050d18;
+    font-family:'Rajdhani',Arial,sans-serif;
+    background:#03060c;
     color:white;
 }
 a{text-decoration:none;color:white}
+button,input,select{font-family:'Rajdhani',Arial,sans-serif}
 
 .layout{
     display:grid;
-    grid-template-columns:270px 1fr;
+    grid-template-columns:280px 1fr;
     min-height:100vh;
 }
+
 .sidebar{
-    background:linear-gradient(180deg,#07111f,#030914);
-    border-right:1px solid #1f2d3d;
-    padding:20px 14px;
+    background:linear-gradient(180deg,#07111f,#02050b);
+    border-right:1px solid rgba(255,138,0,.25);
+    padding:22px 15px;
+    box-shadow:10px 0 45px rgba(0,0,0,.45);
 }
+
 .brand{
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:35px;
+    margin-bottom:36px;
 }
+
 .logo-icon{
-    width:52px;
-    height:52px;
+    width:54px;
+    height:54px;
     border:2px solid #ff8a00;
-    border-radius:14px;
+    border-radius:15px;
     display:flex;
     align-items:center;
     justify-content:center;
     color:#ff8a00;
     font-size:28px;
-    box-shadow:0 0 22px rgba(255,138,0,.35);
+    box-shadow:0 0 25px rgba(255,138,0,.55);
 }
+
 .brand h2{
     margin:0;
-    font-size:19px;
+    font-family:'Bebas Neue';
+    font-size:25px;
+    letter-spacing:1.5px;
 }
+
 .brand span{
     color:#ff8a00;
     font-size:12px;
     font-weight:900;
+    letter-spacing:2px;
 }
+
 .menu-title{
     color:#7d8ca3;
     font-size:12px;
-    margin:22px 12px 10px;
+    margin:24px 12px 10px;
+    font-weight:900;
+    letter-spacing:1.5px;
 }
+
 .menu-item{
     display:flex;
     align-items:center;
     gap:12px;
     padding:14px;
-    border-radius:10px;
+    border-radius:11px;
     color:#d7dee9;
     margin-bottom:8px;
+    font-weight:800;
+    border:1px solid transparent;
 }
+
 .menu-item.active{
-    background:linear-gradient(90deg,rgba(255,138,0,.25),rgba(255,138,0,.05));
+    background:linear-gradient(90deg,rgba(255,138,0,.27),rgba(255,138,0,.05));
     border:1px solid #ff8a00;
     color:#ff8a00;
+    box-shadow:0 0 22px rgba(255,138,0,.22);
 }
+
 .collection-box{
-    margin-top:40px;
+    margin-top:38px;
     padding:20px;
-    border-radius:14px;
-    background:linear-gradient(145deg,#10152e,#190f2d);
-    border:1px solid #6d35ff;
-    box-shadow:0 0 25px rgba(109,53,255,.18);
+    border-radius:16px;
+    background:
+    radial-gradient(circle at top right,rgba(255,138,0,.2),transparent 35%),
+    linear-gradient(145deg,#10152e,#190f2d);
+    border:1px solid #8b5cf6;
+    box-shadow:0 0 30px rgba(139,92,246,.25);
 }
-.collection-box h2{margin:8px 0;font-size:28px}
+
+.collection-box h2{
+    margin:8px 0;
+    font-family:'Bebas Neue';
+    font-size:38px;
+    letter-spacing:1px;
+}
 
 .main{
-    padding:0 22px 30px;
+    padding:0 24px 32px;
+    background:
+    radial-gradient(circle at 20% 0%,rgba(255,138,0,.14),transparent 22%),
+    radial-gradient(circle at 85% 10%,rgba(139,92,246,.13),transparent 24%),
+    #03060c;
 }
+
 .topbar{
     height:88px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    border-bottom:1px solid #1f2d3d;
+    border-bottom:1px solid rgba(255,138,0,.18);
 }
+
 .topbar h1{
     margin:0;
-    font-size:26px;
+    font-family:'Bebas Neue';
+    font-size:42px;
+    letter-spacing:2px;
 }
+
 .topbar p{
-    margin:5px 0 0;
+    margin:3px 0 0;
     color:#9aa8ba;
+    font-weight:700;
 }
+
 .top-actions{
     display:flex;
-    gap:14px;
+    gap:13px;
 }
+
 .top-pill{
     background:#0b1624;
-    border:1px solid #1f2d3d;
+    border:1px solid rgba(255,138,0,.24);
     padding:12px 18px;
     border-radius:10px;
     color:#d7dee9;
+    font-weight:900;
 }
 
 .stats{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:18px;
-    margin:22px 0;
+    margin:24px 0;
 }
+
 .stat-card{
-    border-radius:14px;
-    padding:22px;
-    min-height:145px;
+    border-radius:16px;
+    padding:23px;
+    min-height:150px;
     position:relative;
     overflow:hidden;
     border:1px solid #24364c;
-    box-shadow:0 20px 45px rgba(0,0,0,.35);
+    box-shadow:0 20px 48px rgba(0,0,0,.38);
 }
+
 .stat-card:before{
     content:"";
     position:absolute;
-    width:130px;
-    height:130px;
+    width:145px;
+    height:145px;
     border-radius:50%;
-    right:-40px;
-    top:-40px;
+    right:-48px;
+    top:-48px;
     opacity:.22;
     background:white;
 }
-.stat-card small{color:#d4dae4}
-.stat-card h2{
-    font-size:32px;
-    margin:14px 0 4px;
+
+.stat-card small{
+    color:#d4dae4;
+    font-weight:900;
+    letter-spacing:1.2px;
 }
+
+.stat-card h2{
+    font-family:'Bebas Neue';
+    font-size:44px;
+    margin:14px 0 4px;
+    letter-spacing:1px;
+}
+
 .stat-card p{
     color:#c7d0df;
     margin:0;
     font-size:13px;
+    font-weight:700;
 }
-.orange-card{background:linear-gradient(145deg,#2a1608,#5a2b08);border-color:#ff8a00}
-.green-card{background:linear-gradient(145deg,#082417,#064e33);border-color:#22c55e}
-.yellow-card{background:linear-gradient(145deg,#241c06,#5a4305);border-color:#eab308}
-.red-card{background:linear-gradient(145deg,#2a0909,#5a1111);border-color:#ef4444}
-.purple-card{background:linear-gradient(145deg,#120c2d,#31176b);border-color:#8b5cf6}
+
+.orange-card{background:linear-gradient(145deg,#2a1608,#6b3209);border-color:#ff8a00;box-shadow:0 0 25px rgba(255,138,0,.20)}
+.green-card{background:linear-gradient(145deg,#082417,#065f3d);border-color:#22c55e;box-shadow:0 0 25px rgba(34,197,94,.15)}
+.yellow-card{background:linear-gradient(145deg,#241c06,#6b5005);border-color:#eab308;box-shadow:0 0 25px rgba(234,179,8,.13)}
+.red-card{background:linear-gradient(145deg,#2a0909,#641414);border-color:#ef4444;box-shadow:0 0 25px rgba(239,68,68,.14)}
+.purple-card{background:linear-gradient(145deg,#120c2d,#3d1c7a);border-color:#8b5cf6;box-shadow:0 0 25px rgba(139,92,246,.18)}
 
 .filter-panel{
-    background:#0b1624;
-    border:1px solid #1f2d3d;
-    border-radius:14px;
+    background:linear-gradient(160deg,#0b1624,#060b13);
+    border:1px solid rgba(255,138,0,.18);
+    border-radius:16px;
     padding:18px;
     display:grid;
     grid-template-columns:2fr 1fr 1fr 1fr auto auto;
     gap:14px;
     margin-bottom:20px;
+    box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
+
 .filter-panel input,.filter-panel select{
     width:100%;
     background:#07101c;
     border:1px solid #24364c;
     color:white;
     padding:14px;
-    border-radius:9px;
+    border-radius:10px;
     outline:none;
+    font-weight:800;
 }
+
+.filter-panel input:focus,.filter-panel select:focus{
+    border-color:#ff8a00;
+    box-shadow:0 0 18px rgba(255,138,0,.25);
+}
+
 .btn{
     border:0;
     padding:12px 16px;
-    border-radius:8px;
+    border-radius:9px;
     font-weight:900;
     cursor:pointer;
     display:inline-block;
     text-align:center;
 }
-.btn-orange{background:linear-gradient(135deg,#ff9f1a,#ff5a00);color:white}
+
+.btn-orange{background:linear-gradient(135deg,#ffbd1a,#ff5a00);color:white;box-shadow:0 0 20px rgba(255,106,0,.35)}
 .btn-dark{background:#182232;color:white}
 .btn-green{background:linear-gradient(135deg,#16a34a,#058636);color:white}
 .btn-blue{background:linear-gradient(135deg,#2563eb,#1743a8);color:white}
@@ -188,88 +253,112 @@ a{text-decoration:none;color:white}
 .btn-yellow{background:linear-gradient(135deg,#f59e0b,#d97706);color:white}
 
 .table-card{
-    background:#0b1624;
-    border:1px solid #1f2d3d;
-    border-radius:14px;
+    background:linear-gradient(160deg,#0b1624,#050a12);
+    border:1px solid rgba(255,138,0,.2);
+    border-radius:16px;
     padding:18px;
-    box-shadow:0 18px 45px rgba(0,0,0,.32);
+    box-shadow:0 20px 52px rgba(0,0,0,.38);
+    overflow:auto;
 }
+
 .table-title{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:16px;
 }
+
 .table-title h2{
     margin:0;
     color:#ff8a00;
+    font-family:'Bebas Neue';
+    font-size:34px;
+    letter-spacing:1.5px;
 }
+
 .player-table{
     width:100%;
     border-collapse:collapse;
 }
+
 .player-table th{
     color:#b5c1d3;
     font-size:12px;
     text-align:left;
     padding:14px 12px;
     border-bottom:1px solid #24364c;
+    letter-spacing:1px;
 }
+
 .player-table td{
     padding:14px 12px;
     border-bottom:1px solid #172538;
     vertical-align:middle;
+    font-weight:700;
 }
+
 .player-table tr:hover td{
     background:#0f2135;
 }
+
 .player-name{
     font-weight:900;
+    color:white;
 }
+
 .sub{
     color:#93a4ba;
     font-size:12px;
     margin-top:5px;
 }
+
 .badge{
     padding:6px 10px;
-    border-radius:7px;
+    border-radius:8px;
     font-size:12px;
     font-weight:900;
     display:inline-block;
 }
+
 .badge-paid{background:#064e33;color:#34d399}
 .badge-pending{background:#5a4305;color:#facc15}
 .badge-rejected{background:#5a1111;color:#fca5a5}
 .badge-mode{background:#153966;color:#7dd3fc}
 .badge-played{background:#064e33;color:#34d399}
 .badge-no{background:#4c1d1d;color:#fca5a5}
+
 .kills{
     color:#ff8a00;
     font-weight:900;
-    font-size:18px;
+    font-size:20px;
+    text-shadow:0 0 14px rgba(255,138,0,.45);
 }
+
 .rank-medal{
     font-size:24px;
 }
+
 .rank-num{
     font-weight:900;
     color:#dce6f4;
 }
+
 .actions{
     display:flex;
     gap:7px;
     flex-wrap:wrap;
 }
+
 .action-btn{
     padding:7px 10px;
-    border-radius:7px;
+    border-radius:8px;
     font-size:12px;
     font-weight:900;
     display:inline-block;
     border:none;
     cursor:pointer;
 }
+
 .empty{
     padding:30px;
     text-align:center;
@@ -278,27 +367,39 @@ a{text-decoration:none;color:white}
 
 .mode-earn{
     margin:20px 0;
-    background:#0b1624;
-    border:1px solid #1f2d3d;
-    border-radius:14px;
+    background:linear-gradient(160deg,#0b1624,#050a12);
+    border:1px solid rgba(255,138,0,.18);
+    border-radius:16px;
     padding:18px;
+    box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
+
 .mode-earn h2{
     margin-top:0;
     color:#ff8a00;
+    font-family:'Bebas Neue';
+    font-size:34px;
+    letter-spacing:1.5px;
 }
+
 .earn-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:12px;
 }
+
 .earn-item{
     background:#07101c;
     border:1px solid #24364c;
-    border-radius:10px;
+    border-radius:12px;
     padding:14px;
+    font-weight:800;
 }
-.earn-item b{color:#ff8a00}
+
+.earn-item b{
+    color:#ff8a00;
+    font-size:20px;
+}
 
 @media(max-width:1100px){
     .layout{grid-template-columns:1fr}
@@ -307,11 +408,15 @@ a{text-decoration:none;color:white}
     .filter-panel{grid-template-columns:1fr 1fr}
     .player-table{font-size:13px}
 }
+
 @media(max-width:700px){
     .main{padding:0 12px 20px}
+    .topbar{height:auto;padding:18px 0;display:block}
+    .top-actions{margin-top:14px;flex-wrap:wrap}
     .stats{grid-template-columns:1fr}
     .filter-panel{grid-template-columns:1fr}
-    .player-table, .player-table thead, .player-table tbody, .player-table th, .player-table td, .player-table tr{
+    .earn-grid{grid-template-columns:1fr}
+    .player-table,.player-table thead,.player-table tbody,.player-table th,.player-table td,.player-table tr{
         display:block;
     }
     .player-table thead{display:none}
@@ -371,11 +476,11 @@ a{text-decoration:none;color:white}
     <main class="main">
         <div class="topbar">
             <div>
-                <h1>Dashboard</h1>
+                <h1>Battle Dashboard</h1>
                 <p>Welcome back, Admin</p>
             </div>
             <div class="top-actions">
-                <div class="top-pill">📅 Admin Panel</div>
+                <div class="top-pill">📅 Live Control</div>
                 <a class="top-pill" href="/">SITE</a>
                 <a class="top-pill" href="/logout">LOGOUT</a>
             </div>
@@ -455,7 +560,7 @@ a{text-decoration:none;color:white}
         <section class="table-card">
             <div class="table-title">
                 <h2>Registered Players ({{ players|length }})</h2>
-                <div style="color:#93a4ba;">Live Admin Control</div>
+                <div style="color:#93a4ba;font-weight:800;">Live Admin Control</div>
             </div>
 
             {% if players|length == 0 %}
@@ -477,6 +582,7 @@ a{text-decoration:none;color:white}
                         <th>Actions</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {% for p in players %}
                     <tr>
