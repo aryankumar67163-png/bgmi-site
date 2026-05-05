@@ -600,6 +600,27 @@ input,select{
         <button class="btn" type="submit">SUBMIT ENTRY</button>
     </form>
 </div>
+    <div class="section">
+    <div class="title-row">
+        <h2>🏆 TOP PLAYERS</h2>
+        <div class="view">LIVE RANKING</div>
+    </div>
+
+    <div class="cards">
+        {% for p in leaderboard %}
+        <div class="card" onclick='showPlayer({{ p | tojson | safe }})' style="cursor:pointer;padding:18px;">
+            <h3 style="color:#ff8a00;margin-top:0;">
+                {% if loop.index == 1 %}🥇{% elif loop.index == 2 %}🥈{% elif loop.index == 3 %}🥉{% else %}#{{ loop.index }}{% endif %}
+                {{ p.name }}
+            </h3>
+
+            <p><b>Mode:</b> {{ p.mode }}</p>
+            <p><b>Kills:</b> {{ p.kills|default('0') }}</p>
+            <p style="color:#94a3b8;">Tap to view details</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 <div class="players">
     <h2>REGISTERED PLAYERS</h2>
@@ -641,8 +662,37 @@ function toggleKPI(){
     } else {
         box.style.display = "none";
     }
+    }
+
+function showPlayer(p){
+    document.getElementById("p_name").innerText = p.name || "";
+    document.getElementById("p_uid").innerText = p.uid || "";
+    document.getElementById("p_phone").innerText = p.phone || "";
+    document.getElementById("p_mode").innerText = p.mode || "";
+    document.getElementById("p_kills").innerText = p.kills || "0";
+    document.getElementById("p_rank").innerText = p.rank || "-";
+    document.getElementById("p_win").innerText = p.win_ratio || "-";
+    document.getElementById("p_paid").innerText = p.paid || "";
+    document.getElementById("playerPopup").style.display = "flex";
+}
+
+function closePopup(){
+    document.getElementById("playerPopup").style.display = "none";
 }
 </script>
+    <div id="playerPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;z-index:9999;">
+    <div style="background:#0c1724;color:white;padding:22px;border-radius:16px;width:320px;border:1px solid #ff8a00;box-shadow:0 0 35px rgba(255,138,0,.5);">
+        <h2 id="p_name" style="color:#ff8a00;"></h2>
+        <p><b>UID:</b> <span id="p_uid"></span></p>
+        <p><b>Phone:</b> <span id="p_phone"></span></p>
+        <p><b>Mode:</b> <span id="p_mode"></span></p>
+        <p><b>Kills:</b> <span id="p_kills"></span></p>
+        <p><b>Rank:</b> <span id="p_rank"></span></p>
+        <p><b>Win Ratio:</b> <span id="p_win"></span></p>
+        <p><b>Status:</b> <span id="p_paid"></span></p>
+        <button class="btn" onclick="closePopup()" style="width:100%;">CLOSE</button>
+    </div>
+</div>
 
 </body>
 </html>
