@@ -1,384 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="google-site-verification" content="8z74ioiVAj_eUa4XeFPiEZJkMC0DU6pATGNlQikN7wU" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BGMI Tournaments</title>
 
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#05070c;
-    color:white;
-}
+body{margin:0;background:#05080d;color:white;font-family:Arial,sans-serif}
 a{text-decoration:none;color:white}
-.header{
-    height:88px;
-    background:#070d16;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 34px;
-    border-bottom:1px solid #1d2938;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-.logo{
-    border:2px solid #fff;
-    padding:8px 12px;
-    border-radius:8px;
-    font-size:26px;
-    font-weight:900;
-    box-shadow:0 0 22px rgba(255,138,0,.45);
-}
-.logo span{
-    display:block;
-    color:#ff8a00;
-    font-size:12px;
-}
-.nav{
-    display:flex;
-    gap:34px;
-    font-weight:900;
-}
-.nav a{
-    color:white;
-    cursor:pointer;
-}
+.header{height:88px;background:#060b13;display:flex;align-items:center;justify-content:space-between;padding:0 35px;border-bottom:1px solid #202b38}
+.logo{border:2px solid #fff;border-radius:8px;padding:8px 12px;font-size:28px;font-weight:900;box-shadow:0 0 20px rgba(255,138,0,.6)}
+.logo span{display:block;color:#ff8a00;font-size:12px}
+.nav{display:flex;gap:35px;font-weight:900}
+.nav a{cursor:pointer}
 .nav a:hover{color:#ff8a00}
-.auth{
-    display:flex;
-    gap:14px;
-}
-.login-btn,.signup-btn{
-    padding:13px 24px;
-    border-radius:8px;
-    font-weight:900;
-}
-.login-btn{
-    border:1px solid #ff8a00;
-    color:#ff8a00;
-}
-.signup-btn{
-    background:linear-gradient(135deg,#ff9f1a,#ff5a00);
-    box-shadow:0 0 25px rgba(255,106,0,.55);
-}
-.alert-banner{
-    background:linear-gradient(90deg,#650000,#c00000,#650000);
-    padding:12px 18px;
-    text-align:center;
-    font-weight:900;
-    border-bottom:1px solid #ff3b3b;
-}
-.hero{
-    min-height:600px;
-    background:
-    linear-gradient(90deg,rgba(4,7,12,.96),rgba(4,7,12,.55),rgba(4,7,12,.95)),
-    url("https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1800&q=80");
-    background-size:cover;
-    background-position:center;
-    display:grid;
-    grid-template-columns:1.25fr .75fr;
-    align-items:center;
-    padding:55px 70px;
-    gap:40px;
-}
-.hero-kicker{
-    color:#ff8a00;
-    font-weight:900;
-    letter-spacing:1px;
-    font-size:18px;
-}
-.hero h1{
-    font-size:86px;
-    line-height:86px;
-    margin:12px 0;
-    font-weight:900;
-}
-.hero h1 span{
-    display:block;
-    color:#ff8a00;
-    text-shadow:0 0 26px rgba(255,138,0,.5);
-}
-.hero p{
-    color:#d7deea;
-    font-size:22px;
-    line-height:32px;
-    max-width:620px;
-}
-.cta-row{
-    display:flex;
-    gap:18px;
-    margin-top:28px;
-}
-.btn{
-    background:linear-gradient(135deg,#ff9f1a,#ff5a00);
-    color:white;
-    border:none;
-    padding:15px 28px;
-    border-radius:8px;
-    font-weight:900;
-    cursor:pointer;
-    display:inline-block;
-    box-shadow:0 0 24px rgba(255,106,0,.45);
-}
-.btn-outline{
-    background:rgba(0,0,0,.35);
-    border:1px solid #ff8a00;
-}
-.features{
-    display:flex;
-    gap:30px;
-    margin-top:42px;
-    flex-wrap:wrap;
-}
-.feature{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    color:#dbe4f0;
-}
-.feature-icon{
-    width:42px;
-    height:42px;
-    border:1px solid #ff8a00;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#ff8a00;
-}
-.stats-box{
-    background:rgba(8,16,28,.86);
-    border:1px solid #33465c;
-    border-radius:16px;
-    padding:24px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
-}
-.stats-title{
-    font-weight:900;
-    margin-bottom:18px;
-}
-.stat{
-    display:grid;
-    grid-template-columns:70px 1fr;
-    gap:18px;
-    align-items:center;
-    border-bottom:1px solid #27384c;
-    padding:22px 0;
-}
+.auth{display:flex;gap:18px}
+.auth a{padding:14px 24px;border-radius:8px;font-weight:900}
+.login{border:1px solid #ff8a00}
+.signup{background:linear-gradient(135deg,#ff9f1a,#ff5a00);box-shadow:0 0 25px rgba(255,106,0,.7)}
+.alert{background:linear-gradient(90deg,#650000,#b50000,#650000);text-align:center;padding:12px;font-weight:900;border-bottom:1px solid #ff3030}
+
+.hero{min-height:620px;background:linear-gradient(90deg,#05080d 0%,rgba(5,8,13,.75) 45%,#05080d 100%),url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1800&q=80");background-size:cover;background-position:center;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;padding:70px 90px;align-items:center}
+.kicker{color:#ff8a00;font-weight:900;font-size:20px}
+.hero h1{font-size:88px;line-height:86px;margin:15px 0;font-weight:900}
+.hero h1 span{display:block;color:#ff8a00;text-shadow:0 0 30px rgba(255,138,0,.6)}
+.hero p{font-size:22px;color:#d9e1ec;line-height:32px}
+.btn{background:linear-gradient(135deg,#ff9f1a,#ff5a00);border:none;color:white;padding:15px 26px;border-radius:8px;font-weight:900;cursor:pointer;display:inline-block;box-shadow:0 0 25px rgba(255,106,0,.45)}
+.btn-outline{background:rgba(0,0,0,.35);border:1px solid #ff8a00}
+.cta{display:flex;gap:18px;margin-top:28px}
+.features{display:flex;gap:25px;margin-top:42px;flex-wrap:wrap}
+.feature{display:flex;align-items:center;gap:10px}
+.circle{width:42px;height:42px;border:1px solid #ff8a00;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ff8a00}
+
+.stat-box{background:rgba(9,18,31,.9);border:1px solid #33465c;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.stat-title{font-weight:900;margin-bottom:18px}
+.stat{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid #27384c;align-items:center}
 .stat:last-child{border-bottom:none}
-.stat-icon{
-    width:58px;
-    height:58px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    background:rgba(255,138,0,.15);
-    color:#ff8a00;
-}
-.stat small{
-    color:#c6d0dd;
-    font-weight:900;
-}
-.stat h2{
-    margin:6px 0 0;
-    font-size:34px;
-}
+.stat-icon{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;background:rgba(255,138,0,.15)}
+.stat small{font-weight:900;color:#c8d2df}
+.stat h2{font-size:34px;margin:6px 0}
 .orange{color:#ff8a00}
-.section{
-    padding:58px 70px;
-}
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:26px;
-}
-.section-head small{
-    color:#ff8a00;
-    font-weight:900;
-}
-.section-head h2{
-    margin:6px 0 0;
-    font-size:34px;
-}
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-}
-.t-card{
-    min-height:270px;
-    border-radius:16px;
-    overflow:hidden;
-    border:1px solid #28384c;
-    position:relative;
-    background:#0b1624;
-    box-shadow:0 18px 45px rgba(0,0,0,.35);
-}
-.t-img{
-    height:150px;
-    background-size:cover;
-    background-position:center;
-    position:relative;
-}
-.t-img:after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.88));
-}
-.t-img h3{
-    position:absolute;
-    z-index:2;
-    bottom:16px;
-    left:18px;
-    margin:0;
-    font-size:24px;
-}
+
+.section{padding:60px 90px}
+.section small{color:#ff8a00;font-weight:900}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px}
+.section h2{font-size:34px;margin:8px 0}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.t-card{background:#0b1624;border:1px solid #28384c;border-radius:16px;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,.4)}
+.t-img{height:170px;background-size:cover;background-position:center;position:relative}
+.t-img:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.9))}
+.t-img h3{position:absolute;z-index:2;bottom:18px;left:18px;font-size:24px;margin:0}
+.badge{position:absolute;z-index:3;top:12px;left:12px;padding:8px 13px;border-radius:7px;font-size:12px;font-weight:900}
+.live{background:#16a34a}
+.full{background:#dc2626}
 .erangel{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80")}
 .tdm{background-image:url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80")}
-.solo{background-image:url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=900&q=80")}
-.badge{
-    position:absolute;
-    z-index:3;
-    top:12px;
-    left:12px;
-    padding:7px 12px;
-    border-radius:7px;
-    font-size:12px;
-    font-weight:900;
-}
-.live{background:#16a34a;color:white}
-.full{background:#dc2626;color:white}
+.solo{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80")}
+.duo{background-image:url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80")}
 .t-body{padding:18px}
-.t-info{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin:16px 0;
-}
-.t-info small{
-    color:#9aa8ba;
-    font-size:11px;
-}
-.t-info b{
-    display:block;
-    margin-top:5px;
-}
-.t-card .btn{width:100%;text-align:center}
-.join-box{
-    max-width:900px;
-    margin:20px auto;
-    background:linear-gradient(145deg,#0b1624,#07101b);
-    border:1px solid #28384c;
-    border-radius:18px;
-    padding:30px;
-    box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-.join-box h2{color:#ff8a00;margin-top:0}
-.pay-box{
-    background:#0f1d2d;
-    border:1px solid #304158;
-    border-radius:14px;
-    padding:18px;
-    margin-bottom:22px;
-}
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-input,select{
-    width:100%;
-    padding:15px;
-    background:#111f31;
-    color:white;
-    border:1px solid #314258;
-    border-radius:9px;
-    margin-bottom:12px;
-}
-.leader-filter{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-}
-.leader-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-.leader-card{
-    background:#0b1624;
-    border:1px solid #28384c;
-    border-radius:16px;
-    padding:22px;
-    cursor:pointer;
-    box-shadow:0 16px 40px rgba(0,0,0,.35);
-}
-.leader-card.top1{border-color:gold;box-shadow:0 0 28px rgba(255,215,0,.45)}
-.leader-card.top2{border-color:silver;box-shadow:0 0 24px rgba(192,192,192,.35)}
-.leader-card.top3{border-color:#cd7f32;box-shadow:0 0 24px rgba(205,127,50,.35)}
-.leader-card h3{
-    margin:0 0 14px;
-    color:#ff8a00;
-}
-.players{
-    padding:40px 70px;
-}
-.player-card{
-    background:#0b1624;
-    border:1px solid #28384c;
-    border-radius:10px;
-    padding:14px;
-    margin-bottom:10px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-}
-.footer{
-    padding:28px;
-    text-align:center;
-    background:#070d16;
-    color:#cbd5e1;
-}
-.popup-bg{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.78);
-    z-index:9999;
-    align-items:center;
-    justify-content:center;
-}
-.popup-card{
-    width:340px;
-    background:#0b1624;
-    color:white;
-    border:1px solid #ff8a00;
-    border-radius:18px;
-    padding:24px;
-    box-shadow:0 0 40px rgba(255,138,0,.45);
-}
-.popup-card h2{color:#ff8a00}
+.t-info{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.t-info small{color:#93a4ba;font-size:11px}
+.t-info b{display:block;margin-top:5px}
+
+.join-box{max-width:900px;margin:30px auto;background:#0b1624;border:1px solid #28384c;border-radius:18px;padding:30px}
+.join-box h2{color:#ff8a00}
+.pay-box{background:#101d2d;border:1px solid #304158;border-radius:14px;padding:18px;margin-bottom:22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input,select{width:100%;padding:15px;background:#111f31;color:white;border:1px solid #314258;border-radius:9px;margin-bottom:12px}
+
+.leader-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.leader-card{background:#0b1624;border:1px solid #28384c;border-radius:16px;padding:22px;text-align:center;cursor:pointer}
+.top1{border-color:gold;box-shadow:0 0 28px rgba(255,215,0,.45)}
+.top2{border-color:silver;box-shadow:0 0 24px rgba(192,192,192,.35)}
+.top3{border-color:#cd7f32;box-shadow:0 0 24px rgba(205,127,50,.35)}
+.leader-card h3{color:#ff8a00}
+
+.players{padding:40px 90px}
+.player-card{background:#0b1624;border:1px solid #28384c;border-radius:10px;padding:14px;margin-bottom:10px;display:grid;grid-template-columns:repeat(4,1fr)}
+.footer{padding:28px;text-align:center;background:#070d16;color:#cbd5e1}
+.popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9999;align-items:center;justify-content:center}
+.popup-box{width:340px;background:#0b1624;border:1px solid #ff8a00;border-radius:18px;padding:24px;box-shadow:0 0 40px rgba(255,138,0,.45)}
+.popup-box h2{color:#ff8a00}
 
 @media(max-width:900px){
-    .header{height:auto;flex-direction:column;gap:18px;padding:18px}
-    .nav{gap:16px;flex-wrap:wrap;justify-content:center}
-    .auth{display:none}
-    .hero{grid-template-columns:1fr;padding:36px 24px}
-    .hero h1{font-size:52px;line-height:56px}
-    .cards,.leader-grid{grid-template-columns:1fr}
-    .section,.players{padding:36px 22px}
-    .form-grid{grid-template-columns:1fr}
-    .player-card{grid-template-columns:1fr;gap:8px}
+.header{height:auto;flex-direction:column;gap:18px;padding:18px}.nav{flex-wrap:wrap;justify-content:center}.auth{display:none}
+.hero{grid-template-columns:1fr;padding:40px 24px}.hero h1{font-size:54px;line-height:58px}
+.cards,.leader-grid{grid-template-columns:1fr}.section,.players{padding:36px 22px}.form-grid{grid-template-columns:1fr}.player-card{grid-template-columns:1fr;gap:8px}
 }
 </style>
 </head>
@@ -387,7 +94,6 @@ input,select{
 
 <div class="header">
     <div class="logo">BGMI<span>TOURNAMENTS</span></div>
-
     <div class="nav">
         <a onclick="scrollToTop()">HOME</a>
         <a onclick="scrollToTournaments()">TOURNAMENTS</a>
@@ -395,153 +101,82 @@ input,select{
         <a onclick="scrollToLeaderboard()">LEADERBOARD</a>
         <a href="/admin">ADMIN</a>
     </div>
-
     <div class="auth">
-        <a class="login-btn" href="/admin">LOGIN</a>
-        <a class="signup-btn" onclick="scrollToForm()">SIGN UP</a>
+        <a class="login" href="/admin">LOGIN</a>
+        <a class="signup" onclick="scrollToForm()">SIGN UP</a>
     </div>
 </div>
 
-<div class="alert-banner">
-    📢 This is an unofficial BGMI tournament platform. We are not affiliated with Krafton. All matches are skill-based competitions.
-</div>
+<div class="alert">📢 This is an unofficial BGMI tournament platform. We are not affiliated with Krafton. All matches are skill-based competitions.</div>
 
 <section class="hero">
     <div>
-        <div class="hero-kicker">COMPETE • WIN • DOMINATE</div>
+        <div class="kicker">COMPETE • WIN • DOMINATE</div>
         <h1>BGMI <span>TOURNAMENTS</span></h1>
-        <p>Join intense battles, showcase your skills and win exciting rewards.</p>
-
-        <div class="cta-row">
-            <button class="btn" onclick="joinMatch('')">JOIN TOURNAMENT</button>
-            <button class="btn btn-outline" onclick="scrollToTournaments()">BROWSE TOURNAMENTS</button>
+        <p>Join intense battles, showcase your skills and win exciting rewards!</p>
+        <div class="cta">
+            <button class="btn" onclick="joinMatch('')">👥 JOIN TOURNAMENT</button>
+            <button class="btn btn-outline" onclick="scrollToTournaments()">🏆 BROWSE TOURNAMENTS</button>
         </div>
 
         <div class="features">
-            <div class="feature"><div class="feature-icon">🛡️</div><div><b>Secure</b><br>Fair Play</div></div>
-            <div class="feature"><div class="feature-icon">⚡</div><div><b>Instant</b><br>Results</div></div>
-            <div class="feature"><div class="feature-icon">🏆</div><div><b>Exciting</b><br>Rewards</div></div>
-            <div class="feature"><div class="feature-icon">🎧</div><div><b>24/7</b><br>Support</div></div>
+            <div class="feature"><div class="circle">🛡️</div><div><b>Secure</b><br>Fair Play</div></div>
+            <div class="feature"><div class="circle">⚡</div><div><b>Instant</b><br>Results</div></div>
+            <div class="feature"><div class="circle">🏆</div><div><b>Exciting</b><br>Rewards</div></div>
+            <div class="feature"><div class="circle">🎧</div><div><b>24/7</b><br>Support</div></div>
         </div>
     </div>
 
-    <div class="stats-box">
-        <div class="stats-title">🔴 LIVE STATS</div>
-
-        <div class="stat">
-            <div class="stat-icon">🏆</div>
-            <div>
-                <small>TOTAL TOURNAMENTS</small>
-                <h2>48</h2>
-            </div>
-        </div>
-
-        <div class="stat">
-            <div class="stat-icon">👥</div>
-            <div>
-                <small>TOTAL PLAYERS</small>
-                <h2>{{ players|length }}</h2>
-            </div>
-        </div>
-
-        <div class="stat">
-            <div class="stat-icon">₹</div>
-            <div>
-                <small>TOTAL PRIZE POOL</small>
-                <h2 class="orange">₹25,000+</h2>
-            </div>
-        </div>
-
-        <button class="btn" style="width:100%;margin-top:20px;" onclick="scrollToForm()">HOW IT WORKS ›</button>
+    <div class="stat-box">
+        <div class="stat-title">🔴 LIVE STATS</div>
+        <div class="stat"><div class="stat-icon">🏆</div><div><small>TOTAL TOURNAMENTS</small><h2>48</h2></div></div>
+        <div class="stat"><div class="stat-icon">👥</div><div><small>TOTAL PLAYERS</small><h2>{{ players|length }}</h2></div></div>
+        <div class="stat"><div class="stat-icon">₹</div><div><small>TOTAL PRIZE POOL</small><h2 class="orange">₹25,000+</h2></div></div>
+        <button class="btn" style="width:100%;margin-top:18px" onclick="scrollToForm()">HOW IT WORKS ›</button>
     </div>
 </section>
 
 <section class="section" id="tournaments">
     <div class="section-head">
-        <div>
-            <small>FEATURED TOURNAMENTS</small>
-            <h2>ONGOING TOURNAMENTS</h2>
-        </div>
+        <div><small>FEATURED TOURNAMENTS</small><h2>ONGOING TOURNAMENTS</h2></div>
         <button class="btn btn-outline">VIEW ALL TOURNAMENTS</button>
     </div>
 
     <div class="cards">
-
+        {% for mode, title, img, fee, prize in [
+            ('Erangel','ERANGEL CLASSIC','erangel','₹20','₹1500'),
+            ('TDM','TDM ARENA','tdm','₹100','₹160 / PLAYER'),
+            ('Solo','SOLO SHOWDOWN','solo','₹20','₹1000'),
+            ('Squad','SQUAD BATTLE','duo','₹30','₹2250')
+        ] %}
         <div class="t-card">
-            <div class="t-img erangel">
-                {% if mode_slots['Erangel'].used >= mode_slots['Erangel'].limit %}
+            <div class="t-img {{ img }}">
+                {% if mode_slots[mode].used >= mode_slots[mode].limit %}
                 <div class="badge full">FULL</div>
                 {% else %}
                 <div class="badge live">LIVE</div>
                 {% endif %}
-                <h3>ERANGEL CLASSIC</h3>
+                <h3>{{ title }}</h3>
             </div>
             <div class="t-body">
                 <div class="t-info">
-                    <div><small>ENTRY</small><b>₹20</b></div>
-                    <div><small>PRIZE</small><b>₹1500</b></div>
-                    <div><small>SLOTS</small><b>{{ mode_slots['Erangel'].used }}/{{ mode_slots['Erangel'].limit }}</b></div>
+                    <div><small>ENTRY</small><b>{{ fee }}</b></div>
+                    <div><small>PRIZE</small><b>{{ prize }}</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots[mode].used }}/{{ mode_slots[mode].limit }}</b></div>
                 </div>
-                {% if mode_slots['Erangel'].used >= mode_slots['Erangel'].limit %}
+                {% if mode_slots[mode].used >= mode_slots[mode].limit %}
                 <button class="btn" style="background:gray" disabled>FULL</button>
                 {% else %}
-                <button class="btn" onclick="joinMatch('Erangel')">JOIN NOW</button>
+                <button class="btn" style="width:100%" onclick="joinMatch('{{ mode }}')">JOIN NOW</button>
                 {% endif %}
             </div>
         </div>
-
-        <div class="t-card">
-            <div class="t-img tdm">
-                {% if mode_slots['TDM'].used >= mode_slots['TDM'].limit %}
-                <div class="badge full">FULL</div>
-                {% else %}
-                <div class="badge live">LIVE</div>
-                {% endif %}
-                <h3>TDM ARENA</h3>
-            </div>
-            <div class="t-body">
-                <div class="t-info">
-                    <div><small>ENTRY</small><b>₹100</b></div>
-                    <div><small>PRIZE</small><b>₹160 / PLAYER</b></div>
-                    <div><small>SLOTS</small><b>{{ mode_slots['TDM'].used }}/{{ mode_slots['TDM'].limit }}</b></div>
-                </div>
-                {% if mode_slots['TDM'].used >= mode_slots['TDM'].limit %}
-                <button class="btn" style="background:gray" disabled>FULL</button>
-                {% else %}
-                <button class="btn" onclick="joinMatch('TDM')">JOIN NOW</button>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="t-card">
-            <div class="t-img solo">
-                {% if mode_slots['Solo'].used >= mode_slots['Solo'].limit %}
-                <div class="badge full">FULL</div>
-                {% else %}
-                <div class="badge live">LIVE</div>
-                {% endif %}
-                <h3>SOLO SHOWDOWN</h3>
-            </div>
-            <div class="t-body">
-                <div class="t-info">
-                    <div><small>ENTRY</small><b>₹20</b></div>
-                    <div><small>PRIZE</small><b>₹1000</b></div>
-                    <div><small>SLOTS</small><b>{{ mode_slots['Solo'].used }}/{{ mode_slots['Solo'].limit }}</b></div>
-                </div>
-                {% if mode_slots['Solo'].used >= mode_slots['Solo'].limit %}
-                <button class="btn" style="background:gray" disabled>FULL</button>
-                {% else %}
-                <button class="btn" onclick="joinMatch('Solo')">JOIN NOW</button>
-                {% endif %}
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
 </section>
 
 <section class="join-box" id="joinForm">
     <h2>JOIN TOURNAMENT</h2>
-
     <div class="pay-box">
         <h3>PAYMENT</h3>
         <p>Click PAY NOW and pay entry fee on UPI.</p>
@@ -569,45 +204,22 @@ input,select{
                 <option value="Mega TDM">Mega TDM</option>
             </select>
         </div>
-
-        <button class="btn" type="submit">SUBMIT ENTRY</button>
+        <button class="btn">SUBMIT ENTRY</button>
     </form>
 </section>
 
 <section class="section" id="leaderboard">
     <div class="section-head">
-        <div>
-            <small>LIVE RANKING</small>
-            <h2>🏆 TOP PLAYERS</h2>
-        </div>
+        <div><small>LEADERBOARD</small><h2>TOP PLAYERS</h2></div>
     </div>
-
-    <form method="GET" action="/" class="leader-filter">
-        <select name="lb_mode">
-            <option value="">All Modes</option>
-            <option value="TDM" {% if leaderboard_mode == 'TDM' %}selected{% endif %}>TDM</option>
-            <option value="Erangel" {% if leaderboard_mode == 'Erangel' %}selected{% endif %}>Erangel</option>
-            <option value="Solo" {% if leaderboard_mode == 'Solo' %}selected{% endif %}>Solo</option>
-            <option value="Squad" {% if leaderboard_mode == 'Squad' %}selected{% endif %}>Squad</option>
-            <option value="Mega Erangel" {% if leaderboard_mode == 'Mega Erangel' %}selected{% endif %}>Mega Erangel</option>
-            <option value="Mega TDM" {% if leaderboard_mode == 'Mega TDM' %}selected{% endif %}>Mega TDM</option>
-        </select>
-        <button class="btn">FILTER</button>
-        <a class="btn btn-outline" href="/">CLEAR</a>
-    </form>
 
     <div class="leader-grid">
         {% for p in leaderboard %}
-        <div class="leader-card {% if p.auto_rank == 1 %}top1{% elif p.auto_rank == 2 %}top2{% elif p.auto_rank == 3 %}top3{% endif %}"
-             onclick='showPlayer({{ p | tojson | safe }})'>
-            <h3>
-                {% if p.auto_rank == 1 %}🥇{% elif p.auto_rank == 2 %}🥈{% elif p.auto_rank == 3 %}🥉{% else %}#{{ p.auto_rank }}{% endif %}
-                {{ p.name }}
-            </h3>
-            <p><b>Mode:</b> {{ p.mode }}</p>
-            <p><b>Kills:</b> {{ p.kills|default('0') }}</p>
-            <p><b>Score:</b> {{ p.score }}</p>
-            <p style="color:#94a3b8;">Tap to view details</p>
+        <div class="leader-card {% if p.auto_rank == 1 %}top1{% elif p.auto_rank == 2 %}top2{% elif p.auto_rank == 3 %}top3{% endif %}" onclick='showPlayer({{ p | tojson | safe }})'>
+            <h3>{% if p.auto_rank == 1 %}🥇{% elif p.auto_rank == 2 %}🥈{% elif p.auto_rank == 3 %}🥉{% else %}#{{ p.auto_rank }}{% endif %}</h3>
+            <h3>{{ p.name }}</h3>
+            <p>Kills: {{ p.kills|default('0') }}</p>
+            <p>Score: {{ p.score }}</p>
         </div>
         {% endfor %}
     </div>
@@ -625,51 +237,37 @@ input,select{
     {% endfor %}
 </section>
 
-<div class="footer">
-    BGMI TOURNAMENTS | Admin panel: /admin
-</div>
+<div class="footer">BGMI TOURNAMENTS | Admin panel: /admin</div>
 
-<div id="playerPopup" class="popup-bg">
-    <div class="popup-card">
+<div class="popup" id="playerPopup">
+    <div class="popup-box">
         <h2 id="p_name"></h2>
         <p><b>Mode:</b> <span id="p_mode"></span></p>
         <p><b>Kills:</b> <span id="p_kills"></span></p>
         <p><b>Rank:</b> <span id="p_rank"></span></p>
         <p><b>Win Ratio:</b> <span id="p_win"></span></p>
-        <button class="btn" style="width:100%;" onclick="closePopup()">CLOSE</button>
+        <button class="btn" onclick="closePopup()" style="width:100%">CLOSE</button>
     </div>
 </div>
 
 <script>
 function joinMatch(mode){
     document.getElementById("joinForm").scrollIntoView({behavior:"smooth"});
-    if(mode){
-        document.getElementById("modeSelect").value = mode;
-    }
+    if(mode){document.getElementById("modeSelect").value=mode}
 }
-function scrollToTop(){
-    window.scrollTo({top:0, behavior:"smooth"});
-}
-function scrollToForm(){
-    document.getElementById("joinForm").scrollIntoView({behavior:"smooth"});
-}
-function scrollToTournaments(){
-    document.getElementById("tournaments").scrollIntoView({behavior:"smooth"});
-}
-function scrollToLeaderboard(){
-    document.getElementById("leaderboard").scrollIntoView({behavior:"smooth"});
-}
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})}
+function scrollToForm(){document.getElementById("joinForm").scrollIntoView({behavior:"smooth"})}
+function scrollToTournaments(){document.getElementById("tournaments").scrollIntoView({behavior:"smooth"})}
+function scrollToLeaderboard(){document.getElementById("leaderboard").scrollIntoView({behavior:"smooth"})}
 function showPlayer(p){
-    document.getElementById("p_name").innerText = p.name || "";
-    document.getElementById("p_mode").innerText = p.mode || "";
-    document.getElementById("p_kills").innerText = p.kills || "0";
-    document.getElementById("p_rank").innerText = p.rank || "-";
-    document.getElementById("p_win").innerText = p.win_ratio || "-";
-    document.getElementById("playerPopup").style.display = "flex";
+    document.getElementById("p_name").innerText=p.name||"";
+    document.getElementById("p_mode").innerText=p.mode||"";
+    document.getElementById("p_kills").innerText=p.kills||"0";
+    document.getElementById("p_rank").innerText=p.rank||"-";
+    document.getElementById("p_win").innerText=p.win_ratio||"-";
+    document.getElementById("playerPopup").style.display="flex";
 }
-function closePopup(){
-    document.getElementById("playerPopup").style.display = "none";
-}
+function closePopup(){document.getElementById("playerPopup").style.display="none"}
 </script>
 
 </body>
