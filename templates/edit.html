@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Player</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    background:#07101a;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+h2{
+    color:#ff8a00;
+}
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    background:#1d2a3a;
+    color:white;
+    border:none;
+    border-radius:5px;
+}
+button{
+    width:100%;
+    padding:12px;
+    background:#ff8a00;
+    color:white;
+    border:none;
+    font-weight:bold;
+    border-radius:5px;
+    cursor:pointer;
+}
+a{
+    color:#ff8a00;
+    text-decoration:none;
+}
+</style>
+
+</head>
+<body>
+
+<h2>✏️ Edit Player: {{ p.name }}</h2>
+
+<form method="POST">
+
+    <label>Kills</label>
+    <input name="kills" value="{{ p.kills or '0' }}">
+
+    <label>Rank</label>
+    <input name="rank" value="{{ p.rank or '' }}">
+
+    <label>Win Ratio</label>
+    <input name="win_ratio" value="{{ p.win_ratio or '' }}">
+
+    <br>
+    <button type="submit">UPDATE</button>
+
+</form>
+
+<br>
+<a href="/admin">⬅ Back to Admin</a>
+
+</body>
+</html>
