@@ -155,18 +155,13 @@ def admin():
 
     mode_slots, full_modes = get_mode_slots(players)
 
-    leaderboard = sorted(
-        players,
-        key=lambda p: int(p.get("kills") or 0),
-        reverse=True
-    )[:10]
-
     total_players = len(players)
     paid_players = len([p for p in players if p.get("paid") == "Paid"])
     pending_players = total_players - paid_players
 
     total_collection = 0
     mode_earning = {}
+
     for p in players:
         if p.get("paid") == "Paid":
             mode = p.get("mode")
@@ -179,7 +174,7 @@ def admin():
 
             mode_earning[mode] += fee
 
-        return render_template(
+    return render_template(
         "admin.html",
         players=players,
         mode_slots=mode_slots,
@@ -188,8 +183,7 @@ def admin():
         paid_players=paid_players,
         pending_players=pending_players,
         total_collection=total_collection,
-        mode_earning=mode_earning,
-        leaderboard=leaderboard
+        mode_earning=mode_earning
     )
     
 @app.route("/add_player", methods=["POST"])
