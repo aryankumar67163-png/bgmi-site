@@ -236,6 +236,46 @@ def mark_played(player_id):
     conn.close()
     return redirect("/admin")
 
+@app.route("/edit/<int:player_id>", methods=["GET", "POST"])
+def edit_player(player_id):
+    conn = get_db()
+    cur = conn.cursor()
+
+    if request.method == "POST":
+        cur.execute("""
+        UPDATE players
+        SET kills=%s, rank=%s, win_ratio=%s
+        WHERE id=%s
+        """, (
+            request.form.get("kills"),
+            request.form.get("rank"),
+            request.form.get("win_ratio"),
+            player_id
+        ))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect("/admin")
+
+    cur.execute("SELECT * FROM players WHERE id=%s", (player_id,))
+    p = cur.fetchone()
+
+    cur.close()
+    conn.close()
+
+    if not p:
+        return redirect("/admin")
+
+    player = {
+        "id": p[0],
+        "name": p[1],
+        "kills": p[8],
+        "rank": p[9],
+        "win_ratio": p[10]
+    }
+
+    return render_template("edit.html", p=player)
+
 @app.route("/delete/<int:player_id>", methods=["POST"])
 def delete(player_id):
     conn = get_db()
