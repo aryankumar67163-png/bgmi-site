@@ -180,6 +180,11 @@ body{
         <option value="TDM">TDM</option>  
         <option value="Erangel">Erangel</option>  
     </select>  
+    <select name="sort" style="padding:10px;">
+    <option value="">Sort</option>
+    <option value="kills_desc">Kills High to Low</option>
+    <option value="unpaid_first">Unpaid First</option>
+</select>
   
     <button class="btn" type="submit">Filter</button>  
     <a class="btn delete" href="/admin">Clear</a>  
@@ -241,14 +246,21 @@ body{
 </div>
         </div>
 
-        <div class="actions">
-            <a class="btn success" href="/mark_paid/{{ p.id }}">MARK PAID</a>
-            <a class="btn success" href="/mark_played/{{ p.id }}">MARK PLAYED</a>
-            <a class="btn edit" href="/edit/{{ p.id }}">EDIT</a>
-           <form method="POST" action="/delete/{{ p.id }}" style="display:inline;">
-    <button class="btn delete" type="submit" onclick="return confirm('Delete this player?')">DELETE</button>
-</form>
-        </div>
+       <div class="actions">
+    <a class="btn success" href="/mark_paid/{{ p.id }}">MARK PAID</a>
+    <a class="btn" href="/mark_pending/{{ p.id }}">PENDING</a>
+    <a class="btn delete" href="/mark_rejected/{{ p.id }}">REJECTED</a>
+    <a class="btn success" href="/mark_played/{{ p.id }}">MARK PLAYED</a>
+    <a class="btn success" href="/quick_kill/{{ p.id }}">+1 KILL</a>
+    <a class="btn edit" href="/set_rank/{{ p.id }}/1">RANK 1</a>
+    <a class="btn edit" href="/set_rank/{{ p.id }}/2">RANK 2</a>
+    <a class="btn edit" href="/set_rank/{{ p.id }}/3">RANK 3</a>
+    <a class="btn edit" href="/edit/{{ p.id }}">EDIT</a>
+
+    <form method="POST" action="/delete/{{ p.id }}" style="display:inline;">
+        <button class="btn delete" type="submit" onclick="return confirm('Delete this player?')">DELETE</button>
+    </form>
+</div>
     </div>
     {% endfor %}
 </div>
