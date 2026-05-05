@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="google-site-verification" content="8z74ioiVAj_eUa4XeFPiEZJkMC0DU6pATGNlQikN7wU" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BGMI Tournaments</title>
 
 <style>
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;background:#05080d;color:white;font-family:Arial,sans-serif}
 a{text-decoration:none;color:white}
-.header{height:88px;background:#060b13;display:flex;align-items:center;justify-content:space-between;padding:0 35px;border-bottom:1px solid #202b38}
+.header{height:88px;background:#060b13;display:flex;align-items:center;justify-content:space-between;padding:0 35px;border-bottom:1px solid #202b38;position:sticky;top:0;z-index:1000}
 .logo{border:2px solid #fff;border-radius:8px;padding:8px 12px;font-size:28px;font-weight:900;box-shadow:0 0 20px rgba(255,138,0,.6)}
 .logo span{display:block;color:#ff8a00;font-size:12px}
 .nav{display:flex;gap:35px;font-weight:900}
@@ -20,10 +22,22 @@ a{text-decoration:none;color:white}
 .signup{background:linear-gradient(135deg,#ff9f1a,#ff5a00);box-shadow:0 0 25px rgba(255,106,0,.7)}
 .alert{background:linear-gradient(90deg,#650000,#b50000,#650000);text-align:center;padding:12px;font-weight:900;border-bottom:1px solid #ff3030}
 
-.hero{min-height:620px;background:linear-gradient(90deg,#05080d 0%,rgba(5,8,13,.75) 45%,#05080d 100%),url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1800&q=80");background-size:cover;background-position:center;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;padding:70px 90px;align-items:center}
+.hero{
+    min-height:620px;
+    background:
+    linear-gradient(90deg,rgba(5,8,13,.98) 0%,rgba(5,8,13,.68) 42%,rgba(5,8,13,.92) 100%),
+    url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1800&q=80");
+    background-size:cover;
+    background-position:center;
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:40px;
+    padding:70px 90px;
+    align-items:center;
+}
 .kicker{color:#ff8a00;font-weight:900;font-size:20px}
-.hero h1{font-size:88px;line-height:86px;margin:15px 0;font-weight:900}
-.hero h1 span{display:block;color:#ff8a00;text-shadow:0 0 30px rgba(255,138,0,.6)}
+.hero h1{font-size:90px;line-height:88px;margin:15px 0;font-weight:900;letter-spacing:2px}
+.hero h1 span{display:block;color:#ff8a00;text-shadow:0 0 28px rgba(255,138,0,.75)}
 .hero p{font-size:22px;color:#d9e1ec;line-height:32px}
 .btn{background:linear-gradient(135deg,#ff9f1a,#ff5a00);border:none;color:white;padding:15px 26px;border-radius:8px;font-weight:900;cursor:pointer;display:inline-block;box-shadow:0 0 25px rgba(255,106,0,.45)}
 .btn-outline{background:rgba(0,0,0,.35);border:1px solid #ff8a00}
