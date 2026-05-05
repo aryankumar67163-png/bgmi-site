@@ -100,10 +100,17 @@ def home():
     players = get_players()
     mode_slots, full_modes = get_mode_slots(players)
 
+    leaderboard = sorted(
+        players,
+        key=lambda p: int(p.get("kills") or 0),
+        reverse=True
+    )[:10]
+
     return render_template("index.html",
         players=players,
         mode_slots=mode_slots,
-        full_modes=full_modes
+        full_modes=full_modes,
+        leaderboard=leaderboard
     )
 
 @app.route("/register", methods=["POST"])
