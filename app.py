@@ -373,18 +373,14 @@ def delete(player_id):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    error = ""
     if request.method == "POST":
         if request.form.get("username") == "admin" and request.form.get("password") == "Aaryan@1999":
             session["admin"] = True
             return redirect("/admin")
+        error = "Invalid username or password"
 
-    return '''
-    <form method="POST">
-    <input name="username">
-    <input type="password" name="password">
-    <button>Login</button>
-    </form>
-    '''
+    return render_template("login.html", error=error)
 
 @app.route("/logout")
 def logout():
