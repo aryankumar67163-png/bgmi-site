@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import psycopg
 import os
 
-app = Flask(__name__)
+app = Flask(_name_)
 app.secret_key = "secret123"
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -373,19 +373,23 @@ def delete(player_id):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    error = ""
     if request.method == "POST":
         if request.form.get("username") == "admin" and request.form.get("password") == "Aaryan@1999":
             session["admin"] = True
             return redirect("/admin")
-        error = "Invalid username or password"
 
-    return render_template("login.html", error=error)
+    return '''
+    <form method="POST">
+    <input name="username">
+    <input type="password" name="password">
+    <button>Login</button>
+    </form>
+    '''
 
 @app.route("/logout")
 def logout():
     session.pop("admin", None)
     return redirect("/login")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True)
