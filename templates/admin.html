@@ -2,667 +2,189 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BGMI Admin Panel</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<title>Admin Panel</title>
 
 <style>
 *{box-sizing:border-box}
 body{
     margin:0;
-    font-family:'Rajdhani',Arial,sans-serif;
-    background:#03060c;
+    font-family:Arial;
+    background:#060f1b;
     color:white;
 }
-a{text-decoration:none;color:white}
-button,input,select{font-family:'Rajdhani',Arial,sans-serif}
 
-.layout{
-    display:grid;
-    grid-template-columns:280px 1fr;
-    min-height:100vh;
-}
-
-.sidebar{
-    background:linear-gradient(180deg,#07111f,#02050b);
-    border-right:1px solid rgba(255,138,0,.25);
-    padding:22px 15px;
-    box-shadow:10px 0 45px rgba(0,0,0,.45);
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:36px;
-}
-
-.logo-icon{
-    width:54px;
-    height:54px;
-    border:2px solid #ff8a00;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#ff8a00;
-    font-size:28px;
-    box-shadow:0 0 25px rgba(255,138,0,.55);
-}
-
-.brand h2{
-    margin:0;
-    font-family:'Bebas Neue';
-    font-size:25px;
-    letter-spacing:1.5px;
-}
-
-.brand span{
-    color:#ff8a00;
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.menu-title{
-    color:#7d8ca3;
-    font-size:12px;
-    margin:24px 12px 10px;
-    font-weight:900;
-    letter-spacing:1.5px;
-}
-
-.menu-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px;
-    border-radius:11px;
-    color:#d7dee9;
-    margin-bottom:8px;
-    font-weight:800;
-    border:1px solid transparent;
-}
-
-.menu-item.active{
-    background:linear-gradient(90deg,rgba(255,138,0,.27),rgba(255,138,0,.05));
-    border:1px solid #ff8a00;
-    color:#ff8a00;
-    box-shadow:0 0 22px rgba(255,138,0,.22);
-}
-
-.collection-box{
-    margin-top:38px;
-    padding:20px;
-    border-radius:16px;
-    background:
-    radial-gradient(circle at top right,rgba(255,138,0,.2),transparent 35%),
-    linear-gradient(145deg,#10152e,#190f2d);
-    border:1px solid #8b5cf6;
-    box-shadow:0 0 30px rgba(139,92,246,.25);
-}
-
-.collection-box h2{
-    margin:8px 0;
-    font-family:'Bebas Neue';
-    font-size:38px;
-    letter-spacing:1px;
-}
-
-.main{
-    padding:0 24px 32px;
-    background:
-    radial-gradient(circle at 20% 0%,rgba(255,138,0,.14),transparent 22%),
-    radial-gradient(circle at 85% 10%,rgba(139,92,246,.13),transparent 24%),
-    #03060c;
-}
-
-.topbar{
-    height:88px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,138,0,.18);
-}
-
-.topbar h1{
-    margin:0;
-    font-family:'Bebas Neue';
-    font-size:42px;
-    letter-spacing:2px;
-}
-
-.topbar p{
-    margin:3px 0 0;
-    color:#9aa8ba;
-    font-weight:700;
-}
-
-.top-actions{
-    display:flex;
-    gap:13px;
-}
-
-.top-pill{
+/* HEADER */
+.header{
     background:#0b1624;
-    border:1px solid rgba(255,138,0,.24);
-    padding:12px 18px;
-    border-radius:10px;
-    color:#d7dee9;
-    font-weight:900;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:18px;
-    margin:24px 0;
-}
-
-.stat-card{
-    border-radius:16px;
-    padding:23px;
-    min-height:150px;
-    position:relative;
-    overflow:hidden;
-    border:1px solid #24364c;
-    box-shadow:0 20px 48px rgba(0,0,0,.38);
-}
-
-.stat-card:before{
-    content:"";
-    position:absolute;
-    width:145px;
-    height:145px;
-    border-radius:50%;
-    right:-48px;
-    top:-48px;
-    opacity:.22;
-    background:white;
-}
-
-.stat-card small{
-    color:#d4dae4;
-    font-weight:900;
-    letter-spacing:1.2px;
-}
-
-.stat-card h2{
-    font-family:'Bebas Neue';
-    font-size:44px;
-    margin:14px 0 4px;
-    letter-spacing:1px;
-}
-
-.stat-card p{
-    color:#c7d0df;
-    margin:0;
-    font-size:13px;
-    font-weight:700;
-}
-
-.orange-card{background:linear-gradient(145deg,#2a1608,#6b3209);border-color:#ff8a00;box-shadow:0 0 25px rgba(255,138,0,.20)}
-.green-card{background:linear-gradient(145deg,#082417,#065f3d);border-color:#22c55e;box-shadow:0 0 25px rgba(34,197,94,.15)}
-.yellow-card{background:linear-gradient(145deg,#241c06,#6b5005);border-color:#eab308;box-shadow:0 0 25px rgba(234,179,8,.13)}
-.red-card{background:linear-gradient(145deg,#2a0909,#641414);border-color:#ef4444;box-shadow:0 0 25px rgba(239,68,68,.14)}
-.purple-card{background:linear-gradient(145deg,#120c2d,#3d1c7a);border-color:#8b5cf6;box-shadow:0 0 25px rgba(139,92,246,.18)}
-
-.filter-panel{
-    background:linear-gradient(160deg,#0b1624,#060b13);
-    border:1px solid rgba(255,138,0,.18);
-    border-radius:16px;
-    padding:18px;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr auto auto;
-    gap:14px;
-    margin-bottom:20px;
-    box-shadow:0 18px 45px rgba(0,0,0,.28);
-}
-
-.filter-panel input,.filter-panel select{
-    width:100%;
-    background:#07101c;
-    border:1px solid #24364c;
-    color:white;
-    padding:14px;
-    border-radius:10px;
-    outline:none;
-    font-weight:800;
-}
-
-.filter-panel input:focus,.filter-panel select:focus{
-    border-color:#ff8a00;
-    box-shadow:0 0 18px rgba(255,138,0,.25);
-}
-
-.btn{
-    border:0;
-    padding:12px 16px;
-    border-radius:9px;
-    font-weight:900;
-    cursor:pointer;
-    display:inline-block;
-    text-align:center;
-}
-
-.btn-orange{background:linear-gradient(135deg,#ffbd1a,#ff5a00);color:white;box-shadow:0 0 20px rgba(255,106,0,.35)}
-.btn-dark{background:#182232;color:white}
-.btn-green{background:linear-gradient(135deg,#16a34a,#058636);color:white}
-.btn-blue{background:linear-gradient(135deg,#2563eb,#1743a8);color:white}
-.btn-red{background:linear-gradient(135deg,#ef4444,#b91c1c);color:white}
-.btn-yellow{background:linear-gradient(135deg,#f59e0b,#d97706);color:white}
-
-.table-card{
-    background:linear-gradient(160deg,#0b1624,#050a12);
-    border:1px solid rgba(255,138,0,.2);
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 20px 52px rgba(0,0,0,.38);
-    overflow:auto;
-}
-
-.table-title{
+    padding:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:16px;
+    border-bottom:1px solid #1e2a3a;
 }
-
-.table-title h2{
-    margin:0;
-    color:#ff8a00;
-    font-family:'Bebas Neue';
-    font-size:34px;
-    letter-spacing:1.5px;
-}
-
-.player-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-.player-table th{
-    color:#b5c1d3;
-    font-size:12px;
-    text-align:left;
-    padding:14px 12px;
-    border-bottom:1px solid #24364c;
-    letter-spacing:1px;
-}
-
-.player-table td{
-    padding:14px 12px;
-    border-bottom:1px solid #172538;
-    vertical-align:middle;
-    font-weight:700;
-}
-
-.player-table tr:hover td{
-    background:#0f2135;
-}
-
-.player-name{
+.logo{
+    font-size:22px;
     font-weight:900;
-    color:white;
 }
+.logo span{color:#ff8a00}
 
-.sub{
-    color:#93a4ba;
-    font-size:12px;
-    margin-top:5px;
-}
-
-.badge{
-    padding:6px 10px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:900;
-    display:inline-block;
-}
-
-.badge-paid{background:#064e33;color:#34d399}
-.badge-pending{background:#5a4305;color:#facc15}
-.badge-rejected{background:#5a1111;color:#fca5a5}
-.badge-mode{background:#153966;color:#7dd3fc}
-.badge-played{background:#064e33;color:#34d399}
-.badge-no{background:#4c1d1d;color:#fca5a5}
-
-.kills{
-    color:#ff8a00;
-    font-weight:900;
-    font-size:20px;
-    text-shadow:0 0 14px rgba(255,138,0,.45);
-}
-
-.rank-medal{
-    font-size:24px;
-}
-
-.rank-num{
-    font-weight:900;
-    color:#dce6f4;
-}
-
-.actions{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-.action-btn{
-    padding:7px 10px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:900;
-    display:inline-block;
-    border:none;
-    cursor:pointer;
-}
-
-.empty{
-    padding:30px;
-    text-align:center;
-    color:#93a4ba;
-}
-
-.mode-earn{
-    margin:20px 0;
-    background:linear-gradient(160deg,#0b1624,#050a12);
-    border:1px solid rgba(255,138,0,.18);
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 18px 45px rgba(0,0,0,.28);
-}
-
-.mode-earn h2{
-    margin-top:0;
-    color:#ff8a00;
-    font-family:'Bebas Neue';
-    font-size:34px;
-    letter-spacing:1.5px;
-}
-
-.earn-grid{
+/* DASHBOARD CARDS */
+.cards{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:12px;
+    gap:20px;
+    padding:20px;
 }
-
-.earn-item{
-    background:#07101c;
-    border:1px solid #24364c;
+.card-box{
+    padding:20px;
     border-radius:12px;
-    padding:14px;
-    font-weight:800;
+    background:#0c1724;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+    text-align:center;
+}
+.card-box h2{margin:10px 0}
+
+/* FILTER */
+.filter{
+    display:flex;
+    gap:10px;
+    padding:20px;
+    flex-wrap:wrap;
+}
+.filter input,.filter select{
+    padding:10px;
+    background:#0c1724;
+    border:none;
+    color:white;
 }
 
-.earn-item b{
-    color:#ff8a00;
-    font-size:20px;
+/* PLAYER TABLE */
+.table{
+    margin:20px;
+    background:#0c1724;
+    border-radius:12px;
+    padding:15px;
+}
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    padding:12px;
+    border-bottom:1px solid #1e2a3a;
+    align-items:center;
+}
+.row:hover{
+    background:#111f33;
 }
 
-@media(max-width:1100px){
-    .layout{grid-template-columns:1fr}
-    .sidebar{display:none}
-    .stats{grid-template-columns:1fr 1fr}
-    .filter-panel{grid-template-columns:1fr 1fr}
-    .player-table{font-size:13px}
+/* BUTTONS */
+.btn{
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
 }
+.green{background:#16a34a}
+.blue{background:#2563eb}
+.red{background:#dc2626}
+.orange{background:#ff8a00}
 
-@media(max-width:700px){
-    .main{padding:0 12px 20px}
-    .topbar{height:auto;padding:18px 0;display:block}
-    .top-actions{margin-top:14px;flex-wrap:wrap}
-    .stats{grid-template-columns:1fr}
-    .filter-panel{grid-template-columns:1fr}
-    .earn-grid{grid-template-columns:1fr}
-    .player-table,.player-table thead,.player-table tbody,.player-table th,.player-table td,.player-table tr{
-        display:block;
-    }
-    .player-table thead{display:none}
-    .player-table tr{
-        border:1px solid #24364c;
-        margin-bottom:12px;
-        border-radius:12px;
-        overflow:hidden;
-    }
-    .player-table td{
-        display:flex;
-        justify-content:space-between;
-        gap:10px;
-    }
-    .player-table td:before{
-        content:attr(data-label);
-        color:#93a4ba;
-        font-weight:900;
-    }
+@media(max-width:900px){
+    .cards{grid-template-columns:1fr 1fr}
+    .row{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<div class="layout">
+<div class="header">
+    <div class="logo">BGMI <span>ADMIN</span></div>
+    <div>
+        <a href="/" class="btn orange">SITE</a>
+        <a href="/logout" class="btn red">LOGOUT</a>
+    </div>
+</div>
 
-    <aside class="sidebar">
-        <div class="brand">
-            <div class="logo-icon">♛</div>
-            <div>
-                <h2>BGMI TOURNAMENT</h2>
-                <span>ADMIN PANEL</span>
-            </div>
-        </div>
+<!-- DASHBOARD -->
+<div class="cards">
+    <div class="card-box">
+        <small>Total Players</small>
+        <h2>{{ total_players }}</h2>
+    </div>
+    <div class="card-box" style="background:#0a3d2e">
+        <small>Paid</small>
+        <h2>{{ paid_players }}</h2>
+    </div>
+    <div class="card-box" style="background:#3d0a0a">
+        <small>Pending</small>
+        <h2>{{ pending_players }}</h2>
+    </div>
+    <div class="card-box">
+        <small>Collection</small>
+        <h2>₹{{ total_collection }}</h2>
+    </div>
+</div>
 
-        <div class="menu-item active">🏠 Dashboard</div>
+<!-- FILTER -->
+<form class="filter">
+    <input name="search" placeholder="Search">
 
-        <div class="menu-title">MANAGEMENT</div>
-        <div class="menu-item">👥 Players</div>
-        <div class="menu-item">💳 Payments</div>
-        <div class="menu-item">🎮 Matches</div>
-        <div class="menu-item">🏆 Leaderboard</div>
+    <select name="status">
+        <option value="">Status</option>
+        <option value="Paid">Paid</option>
+        <option value="Pending">Pending</option>
+    </select>
 
-        <div class="menu-title">ANALYTICS</div>
-        <div class="menu-item">📊 Statistics</div>
-        <div class="menu-item">💰 Earnings</div>
-        <div class="menu-item">📄 Reports</div>
+    <select name="mode">
+        <option value="">Mode</option>
+        <option>Solo</option>
+        <option>Squad</option>
+        <option>TDM</option>
+        <option>Erangel</option>
+    </select>
 
-        <div class="collection-box">
-            <small>TOTAL COLLECTION</small>
-            <h2>₹{{ total_collection }}</h2>
-            <p style="color:#93a4ba;margin:0;">Updated just now</p>
-        </div>
-    </aside>
+    <select name="sort">
+        <option value="">Sort</option>
+        <option value="kills_desc">Kills High</option>
+    </select>
 
-    <main class="main">
-        <div class="topbar">
-            <div>
-                <h1>Battle Dashboard</h1>
-                <p>Welcome back, Admin</p>
-            </div>
-            <div class="top-actions">
-                <div class="top-pill">📅 Live Control</div>
-                <a class="top-pill" href="/">SITE</a>
-                <a class="top-pill" href="/logout">LOGOUT</a>
-            </div>
-        </div>
+    <button class="btn orange">Filter</button>
+</form>
 
-        <section class="stats">
-            <div class="stat-card orange-card">
-                <small>Total Players</small>
-                <h2>{{ total_players }}</h2>
-                <p>All registered players</p>
-            </div>
-            <div class="stat-card green-card">
-                <small>Paid Players</small>
-                <h2>{{ paid_players }}</h2>
-                <p>Payment completed</p>
-            </div>
-            <div class="stat-card yellow-card">
-                <small>Pending Players</small>
-                <h2>{{ pending_players }}</h2>
-                <p>Waiting verification</p>
-            </div>
-            <div class="stat-card red-card">
-                <small>Rejected</small>
-                <h2>—</h2>
-                <p>Rejected payments</p>
-            </div>
-            <div class="stat-card purple-card">
-                <small>Total Earnings</small>
-                <h2>₹{{ total_collection }}</h2>
-                <p>From all matches</p>
-            </div>
-        </section>
+<!-- PLAYERS -->
+<div class="table">
 
-        <form method="GET" action="/admin" class="filter-panel">
-            <input type="text" name="search" placeholder="Search by name, UID, phone...">
+<div class="row" style="font-weight:bold;">
+    <div>Name</div>
+    <div>Mode</div>
+    <div>Kills</div>
+    <div>Rank</div>
+    <div>Status</div>
+    <div>Played</div>
+    <div>Payment</div>
+    <div>Actions</div>
+</div>
 
-            <select name="status">
-                <option value="">All Status</option>
-                <option value="Paid">Paid</option>
-                <option value="Pending">Pending</option>
-                <option value="Rejected">Rejected</option>
-            </select>
+{% for p in players %}
+<div class="row">
+    <div>{{ p.name }}</div>
+    <div>{{ p.mode }}</div>
+    <div>{{ p.kills }}</div>
+    <div>{{ p.rank }}</div>
+    <div>{{ p.paid }}</div>
+    <div>{{ p.played }}</div>
+    <div>{{ p.payment_ref }}</div>
 
-            <select name="mode">
-                <option value="">All Modes</option>
-                <option value="Solo">Solo</option>
-                <option value="Duo">Duo</option>
-                <option value="Squad">Squad</option>
-                <option value="TDM">TDM</option>
-                <option value="Erangel">Erangel</option>
-                <option value="Mega Erangel">Mega Erangel</option>
-                <option value="Mega TDM">Mega TDM</option>
-            </select>
-
-            <select name="sort">
-                <option value="">Sort By</option>
-                <option value="kills_desc">Kills High to Low</option>
-                <option value="unpaid_first">Unpaid First</option>
-            </select>
-
-            <button class="btn btn-orange" type="submit">Filter</button>
-            <a class="btn btn-dark" href="/admin">Reset</a>
-        </form>
-
-        <div class="mode-earn">
-            <h2>Mode Wise Earnings</h2>
-            <div class="earn-grid">
-                {% for m, e in mode_earning.items() %}
-                <div class="earn-item">
-                    <div>{{ m }}</div>
-                    <b>₹{{ e }}</b>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <section class="table-card">
-            <div class="table-title">
-                <h2>Registered Players ({{ players|length }})</h2>
-                <div style="color:#93a4ba;font-weight:800;">Live Admin Control</div>
-            </div>
-
-            {% if players|length == 0 %}
-            <div class="empty">No player entries yet.</div>
-            {% else %}
-
-            <table class="player-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Player</th>
-                        <th>Mode</th>
-                        <th>Status</th>
-                        <th>Payment</th>
-                        <th>Played</th>
-                        <th>Kills</th>
-                        <th>Rank</th>
-                        <th>Win Ratio</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for p in players %}
-                    <tr>
-                        <td data-label="#">{{ loop.index }}</td>
-
-                        <td data-label="Player">
-                            <div class="player-name">{{ p.name }}</div>
-                            <div class="sub">UID: {{ p.uid }}</div>
-                            <div class="sub">☎ {{ p.phone }}</div>
-                        </td>
-
-                        <td data-label="Mode">
-                            <span class="badge badge-mode">{{ p.mode }}</span>
-                        </td>
-
-                        <td data-label="Status">
-                            {% if p.paid == "Paid" %}
-                                <span class="badge badge-paid">Paid</span>
-                            {% elif p.paid == "Rejected" %}
-                                <span class="badge badge-rejected">Rejected</span>
-                            {% else %}
-                                <span class="badge badge-pending">Pending</span>
-                            {% endif %}
-                        </td>
-
-                        <td data-label="Payment">
-                            <div>{{ p.payment_ref }}</div>
-                        </td>
-
-                        <td data-label="Played">
-                            {% if p.played == "Yes" %}
-                                <span class="badge badge-played">Yes</span>
-                            {% else %}
-                                <span class="badge badge-no">No</span>
-                            {% endif %}
-                        </td>
-
-                        <td data-label="Kills">
-                            <span class="kills">{{ p.kills|default('0') }}</span>
-                        </td>
-
-                        <td data-label="Rank">
-                            {% if p.rank == "1" %}
-                                <span class="rank-medal">🥇</span>
-                            {% elif p.rank == "2" %}
-                                <span class="rank-medal">🥈</span>
-                            {% elif p.rank == "3" %}
-                                <span class="rank-medal">🥉</span>
-                            {% else %}
-                                <span class="rank-num">{{ p.rank|default('-') }}</span>
-                            {% endif %}
-                        </td>
-
-                        <td data-label="Win Ratio">{{ p.win_ratio|default('-') }}</td>
-
-                        <td data-label="Actions">
-                            <div class="actions">
-                                <a class="action-btn btn-green" href="/quick_kill/{{ p.id }}">+1 Kill</a>
-                                <a class="action-btn btn-blue" href="/set_rank/{{ p.id }}/1">R1</a>
-                                <a class="action-btn btn-blue" href="/set_rank/{{ p.id }}/2">R2</a>
-                                <a class="action-btn btn-blue" href="/set_rank/{{ p.id }}/3">R3</a>
-                                <a class="action-btn btn-yellow" href="/edit/{{ p.id }}">Edit</a>
-                                <a class="action-btn btn-green" href="/mark_paid/{{ p.id }}">Paid</a>
-                                <a class="action-btn btn-dark" href="/mark_pending/{{ p.id }}">Pending</a>
-                                <a class="action-btn btn-red" href="/mark_rejected/{{ p.id }}">Reject</a>
-                                <a class="action-btn btn-green" href="/mark_played/{{ p.id }}">Played</a>
-
-                                <form method="POST" action="/delete/{{ p.id }}" style="display:inline;">
-                                    <button class="action-btn btn-red" type="submit" onclick="return confirm('Delete this player?')">Delete</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            {% endif %}
-        </section>
-    </main>
+    <div>
+        <a href="/quick_kill/{{ p.id }}" class="btn green">+1</a>
+        <a href="/set_rank/{{ p.id }}/1" class="btn blue">R1</a>
+        <a href="/edit/{{ p.id }}" class="btn orange">Edit</a>
+        <a href="/mark_paid/{{ p.id }}" class="btn green">Paid</a>
+        <a href="/mark_rejected/{{ p.id }}" class="btn red">Reject</a>
+    </div>
+</div>
+{% endfor %}
 
 </div>
 
