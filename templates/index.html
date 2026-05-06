@@ -1,105 +1,341 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="google-site-verification" content="8z74ioiVAj_eUa4XeFPiEZJkMC0DU6pATGNlQikN7wU" />
+    <meta name="google-site-verification" content="8z74ioiVAj_eUa4XeFPiEZJkMC0DU6pATGNlQikN7wU" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BGMI Tournaments</title>
+<title>BGMI Tournament</title>
 
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#05080d;color:white;font-family:Arial,sans-serif}
-a{text-decoration:none;color:white}
-.header{height:88px;background:#060b13;display:flex;align-items:center;justify-content:space-between;padding:0 35px;border-bottom:1px solid #202b38;position:sticky;top:0;z-index:1000}
-.logo{border:2px solid #fff;border-radius:8px;padding:8px 12px;font-size:28px;font-weight:900;box-shadow:0 0 20px rgba(255,138,0,.6)}
-.logo span{display:block;color:#ff8a00;font-size:12px}
-.nav{display:flex;gap:35px;font-weight:900}
-.nav a{cursor:pointer}
-.nav a:hover{color:#ff8a00}
-.auth{display:flex;gap:18px}
-.auth a{padding:14px 24px;border-radius:8px;font-weight:900}
-.login{border:1px solid #ff8a00}
-.signup{background:linear-gradient(135deg,#ff9f1a,#ff5a00);box-shadow:0 0 25px rgba(255,106,0,.7)}
-.alert{background:linear-gradient(90deg,#650000,#b50000,#650000);text-align:center;padding:12px;font-weight:900;border-bottom:1px solid #ff3030}
-
+.alert-banner{
+    background:linear-gradient(90deg,#7f0000,#ff1a1a,#7f0000);
+    color:white;
+    font-weight:900;
+    text-align:center;
+    padding:10px 15px;
+    font-size:14px;
+    letter-spacing:.3px;
+    box-shadow:0 0 18px rgba(255,0,0,.7);
+    border-bottom:1px solid #ff5a5a;
+}
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0f172a,#020617);
+    color:white;
+}
+.header{
+    background:#09131d;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    border-bottom:1px solid #1b2b3b;
+}
+.logo{
+    font-size:24px;
+    font-weight:900;
+    color:white;
+    border:3px solid white;
+    padding:6px 10px;
+    box-shadow:0 0 15px rgba(255,138,0,.45);
+    border-radius:8px;
+}
+.logo span{
+    display:block;
+    color:#ff8a00;
+    font-size:12px;
+}
+.nav{
+    display:flex;
+    gap:25px;
+    font-weight:bold;
+}
+.nav a{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+}
+.login{
+    color:#ff8a00;
+    border:1px solid #ff8a00;
+    padding:10px 18px;
+    border-radius:6px;
+}
 .hero{
-    min-height:620px;
+    min-height:380px;
     background:
-    linear-gradient(90deg,rgba(5,8,13,.98) 0%,rgba(5,8,13,.68) 42%,rgba(5,8,13,.92) 100%),
-    url("/static/hero-bg.png");
+    linear-gradient(90deg,rgba(5,10,18,.96),rgba(5,10,18,.45),rgba(5,10,18,.95)),
+    url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80");
     background-size:cover;
     background-position:center;
     display:grid;
-    grid-template-columns:1.3fr .7fr;
-    gap:40px;
-    padding:70px 90px;
+    grid-template-columns:1.2fr .8fr;
     align-items:center;
+    padding:50px;
 }
-.kicker{color:#ff8a00;font-weight:900;font-size:20px}
-.hero h1{font-size:90px;line-height:88px;margin:15px 0;font-weight:900;letter-spacing:2px}
-.hero h1 span{display:block;color:#ff8a00;text-shadow:0 0 28px rgba(255,138,0,.75)}
-.hero p{font-size:22px;color:#d9e1ec;line-height:32px}
-.btn{background:linear-gradient(135deg,#ff9f1a,#ff5a00);border:none;color:white;padding:15px 26px;border-radius:8px;font-weight:900;cursor:pointer;display:inline-block;box-shadow:0 0 25px rgba(255,106,0,.45)}
-.btn-outline{background:rgba(0,0,0,.35);border:1px solid #ff8a00}
-.cta{display:flex;gap:18px;margin-top:28px}
-.features{display:flex;gap:25px;margin-top:42px;flex-wrap:wrap}
-.feature{display:flex;align-items:center;gap:10px}
-.circle{width:42px;height:42px;border:1px solid #ff8a00;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ff8a00}
-
-.stat-box{background:rgba(9,18,31,.9);border:1px solid #33465c;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.stat-title{font-weight:900;margin-bottom:18px}
-.stat{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid #27384c;align-items:center}
-.stat:last-child{border-bottom:none}
-.stat-icon{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;background:rgba(255,138,0,.15)}
-.stat small{font-weight:900;color:#c8d2df}
-.stat h2{font-size:34px;margin:6px 0}
+.hero h1{
+    font-size:50px;
+    line-height:60px;
+    margin:0;
+    font-weight:900;
+    background:linear-gradient(90deg,#ff8a00,#ff3c00);
+    -webkit-background-clip:text;
+    color:transparent;
+}
 .orange{color:#ff8a00}
+.hero p{
+    color:#d5dce6;
+    font-size:17px;
+}
+.btn{
+    background:linear-gradient(135deg,#ff9f1a,#ff5a00);
+    color:white;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    font-weight:900;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    text-align:center;
+    box-shadow:0 0 18px rgba(255,106,0,.45);
+    transition:.25s;
+}
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 28px rgba(255,106,0,.8);
+}
+.hero-stats{
+    background:rgba(8,18,30,.90);
+    border:1px solid #263545;
+    border-radius:10px;
+    padding:22px;
+}
+.hero-stat{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    border-bottom:1px solid #283848;
+    padding:18px 0;
+}
+.hero-stat:last-child{border-bottom:none}
+.icon{font-size:36px}
+.hero-stat small{
+    color:#b9c2cf;
+    font-weight:bold;
+}
+.hero-stat h2{
+    margin:6px 0 0;
+    font-size:30px;
+}
+.section{padding:32px}
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.title-row h2{margin:0;font-size:28px}
+.view{color:#ff8a00;font-weight:bold}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+.card{
+    background:linear-gradient(180deg,#101d2c,#0c1724);
+    border:1px solid #2b3b4c;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    transition:.25s;
+}
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#ff8a00;
+    box-shadow:0 0 25px rgba(255,138,0,.35);
+}
+.card-img{
+    height:150px;
+    background-size:cover;
+    background-position:center;
+    padding:18px;
+    display:flex;
+    align-items:end;
+    position:relative;
+}
+.card-img::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.85));
+}
+.card-img h3{
+    position:relative;
+    z-index:2;
+    text-shadow:0 0 12px rgba(255,138,0,.9);
+}
+    .erangel{
+    background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.80)),url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80");
+}
+.tdm{
+    background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.80)),url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80");
+}
+.card-body{padding:16px}
+.tags span{
+    background:#1b2735;
+    padding:6px 10px;
+    border-radius:4px;
+    font-size:12px;
+    margin-right:5px;
+}
+.info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin:18px 0;
+}
+.info small{
+    color:#94a3b8;
+    font-size:10px;
+}
+.info b{
+    display:block;
+    font-size:18px;
+    margin-top:5px;
+}
+.card .btn{width:100%}
+.join-box{
+    max-width:800px;
+    margin:30px auto;
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    border-radius:14px;
+    padding:26px;
+}
+.join-box h2{
+    color:#ff8a00;
+    margin-top:0;
+}
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+input,select{
+    width:100%;
+    padding:15px;
+    background:#1d2a3a;
+    color:white;
+    border:none;
+    margin-bottom:12px;
+}
+.pay-box{
+    background:#101c2b;
+    border:1px solid #2b3b4c;
+    padding:16px;
+    border-radius:10px;
+    margin-bottom:16px;
+}
+.pay-box h3{
+    color:#ff8a00;
+    margin-top:0;
+}
+.players{
+    padding:30px;
+}
+.player-card{
+    background:#0c1724;
+    border:1px solid #2b3b4c;
+    border-radius:8px;
+    padding:13px;
+    margin-bottom:8px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+}
+.footer{
+    padding:25px;
+    text-align:center;
+    background:#09131d;
+    color:#cbd5e1;
+}
+@media(max-width:800px){
+    .nav,.login{display:none}
+    .hero{grid-template-columns:1fr;padding:30px}
+    .hero h1{font-size:48px;line-height:54px}
+    .hero-stats{margin-top:25px}
+    .cards{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .player-card{grid-template-columns:1fr}
+}
+    .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top:30px;
+}
 
-.section{padding:60px 90px}
-.section small{color:#ff8a00;font-weight:900}
-.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px}
-.section h2{font-size:34px;margin:8px 0}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.t-card{background:#0b1624;border:1px solid #28384c;border-radius:16px;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,.4)}
-.t-img{height:170px;background-size:cover;background-position:center;position:relative}
-.t-img:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.9))}
-.t-img h3{position:absolute;z-index:2;bottom:18px;left:18px;font-size:24px;margin:0}
-.badge{position:absolute;z-index:3;top:12px;left:12px;padding:8px 13px;border-radius:7px;font-size:12px;font-weight:900}
-.live{background:#16a34a}
-.full{background:#dc2626}
-.erangel{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80")}
-.tdm{background-image:url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80")}
-.solo{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80")}
-.duo{background-image:url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80")}
-.t-body{padding:18px}
-.t-info{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.t-info small{color:#93a4ba;font-size:11px}
-.t-info b{display:block;margin-top:5px}
+.card{
+    background:linear-gradient(145deg,#0c1724,#09131d);
+    border:1px solid #1f2a38;
+    border-radius:12px;
+    overflow:hidden;
+    transition:0.3s;
+}
 
-.join-box{max-width:900px;margin:30px auto;background:#0b1624;border:1px solid #28384c;border-radius:18px;padding:30px}
-.join-box h2{color:#ff8a00}
-.pay-box{background:#101d2d;border:1px solid #304158;border-radius:14px;padding:18px;margin-bottom:22px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-input,select{width:100%;padding:15px;background:#111f31;color:white;border:1px solid #314258;border-radius:9px;margin-bottom:12px}
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
 
-.leader-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
-.leader-card{background:#0b1624;border:1px solid #28384c;border-radius:16px;padding:22px;text-align:center;cursor:pointer}
-.top1{border-color:gold;box-shadow:0 0 28px rgba(255,215,0,.45)}
-.top2{border-color:silver;box-shadow:0 0 24px rgba(192,192,192,.35)}
-.top3{border-color:#cd7f32;box-shadow:0 0 24px rgba(205,127,50,.35)}
-.leader-card h3{color:#ff8a00}
+.card-img{
+    height:140px;
+    background-size:cover;
+    background-position:center;
+}
 
-.players{padding:40px 90px}
-.player-card{background:#0b1624;border:1px solid #28384c;border-radius:10px;padding:14px;margin-bottom:10px;display:grid;grid-template-columns:repeat(4,1fr)}
-.footer{padding:28px;text-align:center;background:#070d16;color:#cbd5e1}
-.popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9999;align-items:center;justify-content:center}
-.popup-box{width:340px;background:#0b1624;border:1px solid #ff8a00;border-radius:18px;padding:24px;box-shadow:0 0 40px rgba(255,138,0,.45)}
-.popup-box h2{color:#ff8a00}
+.card-body{
+    padding:15px;
+}
 
-@media(max-width:900px){
-.header{height:auto;flex-direction:column;gap:18px;padding:18px}.nav{flex-wrap:wrap;justify-content:center}.auth{display:none}
-.hero{grid-template-columns:1fr;padding:40px 24px}.hero h1{font-size:54px;line-height:58px}
-.cards,.leader-grid{grid-template-columns:1fr}.section,.players{padding:36px 22px}.form-grid{grid-template-columns:1fr}.player-card{grid-template-columns:1fr;gap:8px}
+.card-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+.card-info{
+    color:#9ca3af;
+    font-size:14px;
+}
+
+.card-btn{
+    display:block;
+    text-align:center;
+    background:linear-gradient(90deg,#ff8a00,#ff3c00);
+    padding:10px;
+    border-radius:6px;
+    text-decoration:none;
+    color:white;
+}
+    .badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:5px 10px;
+    font-size:12px;
+    font-weight:bold;
+    border-radius:4px;
+}
+
+.full{
+    background:red;
+    color:white;
+}
+
+.live{
+    background:limegreen;
+    color:black;
 }
 </style>
 </head>
@@ -112,91 +348,233 @@ input,select{width:100%;padding:15px;background:#111f31;color:white;border:1px s
         <a onclick="scrollToTop()">HOME</a>
         <a onclick="scrollToTournaments()">TOURNAMENTS</a>
         <a onclick="scrollToForm()">JOIN</a>
-        <a onclick="scrollToLeaderboard()">LEADERBOARD</a>
         <a href="/admin">ADMIN</a>
     </div>
-    <div class="auth">
-        <a class="login" href="/admin">LOGIN</a>
-        <a class="signup" onclick="scrollToForm()">SIGN UP</a>
+    <div class="login" onclick="scrollToForm()">LOGIN / SIGNUP</div>
+</div>
+    <div class="alert-banner">
+    This is an unofficial BGMI tournament platform.<br>
+    We are not affiliated with Krafton.<br>
+    All matches are skill-based competitions.
+</div>
+
+<div class="hero">
+    <div>
+        <h1>🔥 BGMI TOURNAMENT</h1>
+        <p>Join matches • Compete • Win Rewards</p>
+        <button class="btn" type="button" onclick="joinMatch('')">JOIN TOURNAMENT</button>
+    </div>
+
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <div class="icon">🏆</div>
+            <div>
+                <small>TOTAL TOURNAMENTS</small>
+                <h2>48</h2>
+            </div>
+        </div>
+        <div class="hero-stat">
+            <div class="icon">👥</div>
+            <div>
+                <small>TOTAL PLAYERS</small>
+                <h2>{{ players|length }}</h2>
+            </div>
+        </div>
+        <div class="hero-stat">
+            <div class="icon">💰</div>
+            <div>
+                <small>TOTAL PRIZE POOL</small>
+                <h2 class="orange">₹25,000+</h2>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="alert">📢 This is an unofficial BGMI tournament platform. We are not affiliated with Krafton. All matches are skill-based competitions.</div>
-
-<section class="hero">
-    <div>
-        <div class="kicker">COMPETE • WIN • DOMINATE</div>
-        <h1>BGMI <span>TOURNAMENTS</span></h1>
-        <p>Join intense battles, showcase your skills and win exciting rewards!</p>
-        <div class="cta">
-            <button class="btn" onclick="joinMatch('')">👥 JOIN TOURNAMENT</button>
-            <button class="btn btn-outline" onclick="scrollToTournaments()">🏆 BROWSE TOURNAMENTS</button>
-        </div>
-
-        <div class="features">
-            <div class="feature"><div class="circle">🛡️</div><div><b>Secure</b><br>Fair Play</div></div>
-            <div class="feature"><div class="circle">⚡</div><div><b>Instant</b><br>Results</div></div>
-            <div class="feature"><div class="circle">🏆</div><div><b>Exciting</b><br>Rewards</div></div>
-            <div class="feature"><div class="circle">🎧</div><div><b>24/7</b><br>Support</div></div>
-        </div>
+<div class="section">
+    <div class="card" onclick="toggleKPI()" style="cursor:pointer;padding:18px;">
+        <h3 style="margin:0;color:#ff8a00;">🔥 MEGA PRIZE DETAILS — CLICK</h3>
+        <p style="margin-bottom:0;">Prize breakdown dekhne ke liye click karo</p>
     </div>
 
-    <div class="stat-box">
-        <div class="stat-title">🔴 LIVE STATS</div>
-        <div class="stat"><div class="stat-icon">🏆</div><div><small>TOTAL TOURNAMENTS</small><h2>48</h2></div></div>
-        <div class="stat"><div class="stat-icon">👥</div><div><small>TOTAL PLAYERS</small><h2>{{ players|length }}</h2></div></div>
-        <div class="stat"><div class="stat-icon">₹</div><div><small>TOTAL PRIZE POOL</small><h2 class="orange">₹25,000+</h2></div></div>
-        <button class="btn" style="width:100%;margin-top:18px" onclick="scrollToForm()">HOW IT WORKS ›</button>
-    </div>
-</section>
+    <div id="kpiBox" style="display:none;margin-top:14px;background:#0c1724;padding:18px;border:1px solid #2b3b4c;border-radius:10px;">
+        <h3 style="color:#ff8a00;">💰 MEGA ERANGEL</h3>
+        <p>Entry: ₹100 per player</p>
+        <p>Prize Pool 75% = ₹7,500</p>
+        <p>🥇 1st: ₹5,000 | 🥈 2nd: ₹1,500 | 🥉 3rd: ₹1,000</p>
 
-<section class="section" id="tournaments">
-    <div class="section-head">
-        <div><small>FEATURED TOURNAMENTS</small><h2>ONGOING TOURNAMENTS</h2></div>
-        <button class="btn btn-outline">VIEW ALL TOURNAMENTS</button>
+        <hr style="border-color:#2b3b4c;">
+
+        <h3 style="color:#ff8a00;">🔥 TDM</h3>
+        <p>Entry: ₹100 per player</p>
+        <p>Prize Pool 80% = ₹640</p>
+        <p>Winning Team: ₹160 per player</p>
+    </div>
+</div>
+
+<div class="section" id="tournaments">
+    <div class="title-row">
+        <h2>UPCOMING TOURNAMENTS</h2>
+        <div class="view" onclick="scrollToTournaments()">VIEW ALL</div>
     </div>
 
     <div class="cards">
-        {% for mode, title, img, fee, prize in [
-            ('Erangel','ERANGEL CLASSIC','erangel','₹20','₹1500'),
-            ('TDM','TDM ARENA','tdm','₹100','₹160 / PLAYER'),
-            ('Solo','SOLO SHOWDOWN','solo','₹20','₹1000'),
-            ('Squad','SQUAD BATTLE','duo','₹30','₹2250')
-        ] %}
-        <div class="t-card">
-            <div class="t-img {{ img }}">
-                {% if mode_slots[mode].used >= mode_slots[mode].limit %}
-                <div class="badge full">FULL</div>
-                {% else %}
-                <div class="badge live">LIVE</div>
-                {% endif %}
-                <h3>{{ title }}</h3>
-            </div>
-            <div class="t-body">
-                <div class="t-info">
-                    <div><small>ENTRY</small><b>{{ fee }}</b></div>
-                    <div><small>PRIZE</small><b>{{ prize }}</b></div>
-                    <div><small>SLOTS</small><b>{{ mode_slots[mode].used }}/{{ mode_slots[mode].limit }}</b></div>
+        <div class="card">
+            <div class="card-img erangel">
+    {% if mode_slots['Erangel'].used >= mode_slots['Erangel'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>ERANGEL<br>CLASSIC</h3>
+</div>
+            <div class="card-body">
+                <div class="tags"><span>Squad</span><span>Erangel</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹20</b></div>
+                    <div><small>PRIZE</small><b>₹1500</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Erangel'].used }}/{{ mode_slots['Erangel'].limit }}</b></div>
                 </div>
-                {% if mode_slots[mode].used >= mode_slots[mode].limit %}
-                <button class="btn" style="background:gray" disabled>FULL</button>
-                {% else %}
-                <button class="btn" style="width:100%" onclick="joinMatch('{{ mode }}')">JOIN NOW</button>
-                {% endif %}
+               {% if mode_slots['Erangel'].used >= mode_slots['Erangel'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Erangel')">JOIN NOW</button>
+{% endif %}
             </div>
         </div>
-        {% endfor %}
-    </div>
-</section>
 
-<section class="join-box" id="joinForm">
+        <div class="card">
+            <div class="card-img tdm">
+    {% if mode_slots['TDM'].used >= mode_slots['TDM'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>TDM<br>WAREHOUSE</h3>
+</div>
+            <div class="card-body">
+                <div class="tags"><span>TDM</span><span>Warehouse</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹100</b></div>
+                    <div><small>PRIZE</small><b>₹160 / PLAYER</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['TDM'].used }}/{{ mode_slots['TDM'].limit }}</b></div>
+                </div>
+               {% if mode_slots['TDM'].used >= mode_slots['TDM'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('TDM')">JOIN NOW</button>
+{% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img erangel">
+    {% if mode_slots['Solo'].used >= mode_slots['Solo'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>SOLO<br>CLASSIC</h3>
+</div>
+            <div class="card-body">
+                <div class="tags"><span>Solo</span><span>Erangel</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹20</b></div>
+                    <div><small>PRIZE</small><b>₹1000</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Solo'].used }}/{{ mode_slots['Solo'].limit }}</b></div>
+                </div>
+               {% if mode_slots['Solo'].used >= mode_slots['Solo'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Solo')">JOIN NOW</button>
+{% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img erangel">
+    {% if mode_slots['Squad'].used >= mode_slots['Squad'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>SQUAD<br>BATTLE</h3>
+</div>
+            <div class="card-body">
+                <div class="tags"><span>Squad</span><span>Custom</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹30</b></div>
+                    <div><small>PRIZE</small><b>₹2250</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Squad'].used }}/{{ mode_slots['Squad'].limit }}</b></div>
+                </div>
+               {% if mode_slots['Squad'].used >= mode_slots['Squad'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Squad')">JOIN NOW</button>
+{% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+           <div class="card-img erangel">
+    {% if mode_slots['Mega Erangel'].used >= mode_slots['Mega Erangel'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>MEGA<br>ERANGEL</h3>
+</div>
+            <div class="card-body">
+                <div class="tags"><span>Mega</span><span>Erangel</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹100</b></div>
+                    <div><small>PRIZE</small><b>₹7500</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Mega Erangel'].used }}/{{ mode_slots['Mega Erangel'].limit }}</b></div>
+                </div>
+                {% if mode_slots['Mega Erangel'].used >= mode_slots['Mega Erangel'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Mega Erangel')">JOIN NOW</button>
+{% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+           <div class="card-img tdm">
+    {% if mode_slots['Mega TDM'].used >= mode_slots['Mega TDM'].limit %}
+    <div class="badge full">FULL</div>
+    {% else %}
+    <div class="badge live">LIVE</div>
+    {% endif %}
+    <h3>MEGA<br>TDM</h3>
+</div>
+            <div class="card-body">
+                <div class="tags"><span>Mega</span><span>TDM</span></div>
+                <div class="info">
+                    <div><small>ENTRY</small><b>₹400</b></div>
+                    <div><small>PRIZE</small><b>₹600 / PLAYER</b></div>
+                    <div><small>SLOTS</small><b>{{ mode_slots['Mega TDM'].used }}/{{ mode_slots['Mega TDM'].limit }}</b></div>
+                </div>
+               {% if mode_slots['Mega TDM'].used >= mode_slots['Mega TDM'].limit %}
+<button class="btn" style="background:gray; cursor:not-allowed;" disabled>FULL</button>
+{% else %}
+<button class="btn" type="button" onclick="joinMatch('Mega TDM')">JOIN NOW</button>
+{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="join-box" id="joinForm">
     <h2>JOIN TOURNAMENT</h2>
+
     <div class="pay-box">
         <h3>PAYMENT</h3>
         <p>Click PAY NOW and pay entry fee on UPI.</p>
         <p><b>UPI:</b> 7004596815-2@axl</p>
         <a class="btn" href="upi://pay?pa=7004596815-2@axl&pn=BGMI%20TOURNAMENT&cu=INR">PAY NOW</a>
     </div>
+
+    <h3>Select match to check slots</h3>
 
     {% if full_modes %}
     <h2 style="color:red;">FULL: {{ full_modes|join(', ') }}</h2>
@@ -218,71 +596,103 @@ input,select{width:100%;padding:15px;background:#111f31;color:white;border:1px s
                 <option value="Mega TDM">Mega TDM</option>
             </select>
         </div>
-        <button class="btn">SUBMIT ENTRY</button>
-    </form>
-</section>
 
-<section class="section" id="leaderboard">
-    <div class="section-head">
-        <div><small>LEADERBOARD</small><h2>TOP PLAYERS</h2></div>
+        <button class="btn" type="submit">SUBMIT ENTRY</button>
+    </form>
+</div>
+    <div class="section">
+    <div class="title-row">
+        <h2>🏆 TOP PLAYERS</h2>
+        <div class="view">LIVE RANKING</div>
     </div>
 
-    <div class="leader-grid">
+    <div class="cards">
         {% for p in leaderboard %}
-        <div class="leader-card {% if p.auto_rank == 1 %}top1{% elif p.auto_rank == 2 %}top2{% elif p.auto_rank == 3 %}top3{% endif %}" onclick='showPlayer({{ p | tojson | safe }})'>
-            <h3>{% if p.auto_rank == 1 %}🥇{% elif p.auto_rank == 2 %}🥈{% elif p.auto_rank == 3 %}🥉{% else %}#{{ p.auto_rank }}{% endif %}</h3>
-            <h3>{{ p.name }}</h3>
-            <p>Kills: {{ p.kills|default('0') }}</p>
-            <p>Score: {{ p.score }}</p>
+        <div class="card" onclick='showPlayer({{ p | tojson | safe }})' style="cursor:pointer;padding:18px;">
+            <h3 style="color:#ff8a00;margin-top:0;">
+                {% if loop.index == 1 %}🥇{% elif loop.index == 2 %}🥈{% elif loop.index == 3 %}🥉{% else %}#{{ loop.index }}{% endif %}
+                {{ p.name }}
+            </h3>
+
+            <p><b>Mode:</b> {{ p.mode }}</p>
+            <p><b>Kills:</b> {{ p.kills|default('0') }}</p>
+            <p style="color:#94a3b8;">Tap to view details</p>
         </div>
         {% endfor %}
     </div>
-</section>
+</div>
 
-<section class="players">
+<div class="players">
     <h2>REGISTERED PLAYERS</h2>
+
     {% for p in players %}
     <div class="player-card">
         <div><b>Name:</b> {{ p.name }}</div>
+        <div><b>UID:</b> {{ p.uid }}</div>
         <div><b>Mode:</b> {{ p.mode }}</div>
-        <div><b>Kills:</b> {{ p.kills|default('0') }}</div>
         <div><b>Status:</b> {{ p.paid }}</div>
     </div>
     {% endfor %}
-</section>
+</div>
 
-<div class="footer">BGMI TOURNAMENTS | Admin panel: /admin</div>
-
-<div class="popup" id="playerPopup">
-    <div class="popup-box">
-        <h2 id="p_name"></h2>
-        <p><b>Mode:</b> <span id="p_mode"></span></p>
-        <p><b>Kills:</b> <span id="p_kills"></span></p>
-        <p><b>Rank:</b> <span id="p_rank"></span></p>
-        <p><b>Win Ratio:</b> <span id="p_win"></span></p>
-        <button class="btn" onclick="closePopup()" style="width:100%">CLOSE</button>
-    </div>
+<div class="footer">
+    BGMI TOURNAMENTS | Admin panel: /admin
 </div>
 
 <script>
 function joinMatch(mode){
     document.getElementById("joinForm").scrollIntoView({behavior:"smooth"});
-    if(mode){document.getElementById("modeSelect").value=mode}
+    if(mode){
+        document.getElementById("modeSelect").value = mode;
+    }
 }
-function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})}
-function scrollToForm(){document.getElementById("joinForm").scrollIntoView({behavior:"smooth"})}
-function scrollToTournaments(){document.getElementById("tournaments").scrollIntoView({behavior:"smooth"})}
-function scrollToLeaderboard(){document.getElementById("leaderboard").scrollIntoView({behavior:"smooth"})}
+function scrollToTop(){
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+function scrollToForm(){
+    document.getElementById("joinForm").scrollIntoView({behavior:"smooth"});
+}
+function scrollToTournaments(){
+    document.getElementById("tournaments").scrollIntoView({behavior:"smooth"});
+}
+function toggleKPI(){
+    var box = document.getElementById("kpiBox");
+    if(box.style.display === "none"){
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+    }
+
 function showPlayer(p){
-    document.getElementById("p_name").innerText=p.name||"";
-    document.getElementById("p_mode").innerText=p.mode||"";
-    document.getElementById("p_kills").innerText=p.kills||"0";
-    document.getElementById("p_rank").innerText=p.rank||"-";
-    document.getElementById("p_win").innerText=p.win_ratio||"-";
-    document.getElementById("playerPopup").style.display="flex";
+    document.getElementById("p_name").innerText = p.name || "";
+    document.getElementById("p_uid").innerText = p.uid || "";
+    document.getElementById("p_phone").innerText = p.phone || "";
+    document.getElementById("p_mode").innerText = p.mode || "";
+    document.getElementById("p_kills").innerText = p.kills || "0";
+    document.getElementById("p_rank").innerText = p.rank || "-";
+    document.getElementById("p_win").innerText = p.win_ratio || "-";
+    document.getElementById("p_paid").innerText = p.paid || "";
+    document.getElementById("playerPopup").style.display = "flex";
 }
-function closePopup(){document.getElementById("playerPopup").style.display="none"}
+
+function closePopup(){
+    document.getElementById("playerPopup").style.display = "none";
+}
 </script>
+    <div id="playerPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;z-index:9999;">
+    <div style="background:#0c1724;color:white;padding:22px;border-radius:16px;width:320px;border:1px solid #ff8a00;box-shadow:0 0 35px rgba(255,138,0,.5);">
+        <h2 id="p_name" style="color:#ff8a00;"></h2>
+        <p><b>UID:</b> <span id="p_uid"></span></p>
+        <p><b>Phone:</b> <span id="p_phone"></span></p>
+        <p><b>Mode:</b> <span id="p_mode"></span></p>
+        <p><b>Kills:</b> <span id="p_kills"></span></p>
+        <p><b>Rank:</b> <span id="p_rank"></span></p>
+        <p><b>Win Ratio:</b> <span id="p_win"></span></p>
+        <p><b>Status:</b> <span id="p_paid"></span></p>
+        <button class="btn" onclick="closePopup()" style="width:100%;">CLOSE</button>
+    </div>
+</div>
 
 </body>
 </html>
