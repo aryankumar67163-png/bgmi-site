@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import psycopg
 import os
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.secret_key = "secret123"
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -391,5 +391,5 @@ def logout():
     session.pop("admin", None)
     return redirect("/login")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
