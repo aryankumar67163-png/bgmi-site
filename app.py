@@ -1,42 +1,11 @@
 from flask import Flask, render_template, request, redirect, session
-import psycopg
 import os
+import json
 
 app = Flask(__name__)
 app.secret_key = "secret123"
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-if not DATABASE_URL:
-    raise Exception("DATABASE_URL not set")
-
-def get_db():
-    return psycopg.connect(DATABASE_URL)
-
-def init_db():
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS players (
-        id SERIAL PRIMARY KEY,
-        name TEXT,
-        uid TEXT,
-        phone TEXT,
-        mode TEXT,
-        payment_ref TEXT,
-        paid TEXT,
-        played TEXT,
-        kills TEXT,
-        rank TEXT,
-        win_ratio TEXT
-    )
-    """)
-
-    conn.commit()
-    cur.close()
-    conn.close()
-
-init_db()
+DATA_FILE = "data.json"
 
 MATCH_CONFIG = {
     "TDM": {"limit": 8, "fee": 100},
@@ -47,37 +16,40 @@ MATCH_CONFIG = {
     "Mega Erangel": {"limit": 100, "fee": 100}
 }
 
+def load_data():
+    if not os.path.exists(DATA_FILE):
+        return {"players": []}
+
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        if "players" not in data:
+            data["players"] = []
+
+        return data
+    except:
+        return {"players": []}
+
+def save_data(data):
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
+
+def get_players():
+    data = load_data()
+    return data.get("players", [])
+
+def next_player_id(players):
+    if not players:
+        return 1
+
+    return max([int(p.get("id", 0)) for p in players]) + 1
+
 def safe_int(value):
     try:
         return int(value or 0)
     except:
         return 0
-
-def get_players():
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM players ORDER BY id DESC")
-    rows = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    players = []
-    for r in rows:
-        players.append({
-            "id": r[0],
-            "name": r[1],
-            "uid": r[2],
-            "phone": r[3],
-            "mode": r[4],
-            "payment_ref": r[5],
-            "paid": r[6],
-            "played": r[7],
-            "kills": r[8],
-            "rank": r[9],
-            "win_ratio": r[10]
-        })
-    return players
 
 def mode_count(players, mode):
     return len([p for p in players if p.get("mode") == mode])
@@ -137,7 +109,8 @@ def home():
 
     leaderboard = build_leaderboard(leaderboard_players)[:10]
 
-    return render_template("index.html",
+    return render_template(
+        "index.html",
         players=players,
         mode_slots=mode_slots,
         full_modes=full_modes,
@@ -147,38 +120,32 @@ def home():
 
 @app.route("/register", methods=["POST"])
 def register():
-    payment_ref = request.form.get("payment_ref")
+    data = load_data()
+    players = data.get("players", [])
 
-    conn = get_db()
-    cur = conn.cursor()
+    payment_ref = request.form.get("payment_ref", "").strip()
 
-    cur.execute("SELECT id FROM players WHERE payment_ref=%s", (payment_ref,))
-    existing = cur.fetchone()
+    for p in players:
+        if p.get("payment_ref") == payment_ref:
+            return "Duplicate UPI Transaction ID. Please check payment reference."
 
-    if existing:
-        cur.close()
-        conn.close()
-        return "Duplicate UPI Transaction ID. Please check payment reference."
+    player = {
+        "id": next_player_id(players),
+        "name": request.form.get("name", "").strip(),
+        "uid": request.form.get("uid", "").strip(),
+        "phone": request.form.get("phone", "").strip(),
+        "mode": request.form.get("mode", "").strip(),
+        "payment_ref": payment_ref,
+        "paid": "Pending",
+        "played": "No",
+        "kills": "0",
+        "rank": "",
+        "win_ratio": ""
+    }
 
-    cur.execute("""
-    INSERT INTO players (name, uid, phone, mode, payment_ref, paid, played, kills, rank, win_ratio)
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-    """, (
-        request.form.get("name"),
-        request.form.get("uid"),
-        request.form.get("phone"),
-        request.form.get("mode"),
-        payment_ref,
-        "Pending",
-        "No",
-        "0",
-        "",
-        ""
-    ))
-
-    conn.commit()
-    cur.close()
-    conn.close()
+    players.append(player)
+    data["players"] = players
+    save_data(data)
 
     return redirect("/")
 
@@ -247,128 +214,94 @@ def admin():
         mode_earning=mode_earning
     )
 
+def update_player(player_id, updates):
+    data = load_data()
+    players = data.get("players", [])
+
+    for p in players:
+        if int(p.get("id")) == int(player_id):
+            p.update(updates)
+            break
+
+    data["players"] = players
+    save_data(data)
+
 @app.route("/mark_paid/<int:player_id>")
 def mark_paid(player_id):
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("UPDATE players SET paid='Paid' WHERE id=%s", (player_id,))
-    conn.commit()
-
-    cur.close()
-    conn.close()
+    update_player(player_id, {"paid": "Paid"})
     return redirect("/admin")
 
 @app.route("/mark_pending/<int:player_id>")
 def mark_pending(player_id):
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("UPDATE players SET paid='Pending' WHERE id=%s", (player_id,))
-    conn.commit()
-
-    cur.close()
-    conn.close()
+    update_player(player_id, {"paid": "Pending"})
     return redirect("/admin")
 
 @app.route("/mark_rejected/<int:player_id>")
 def mark_rejected(player_id):
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("UPDATE players SET paid='Rejected' WHERE id=%s", (player_id,))
-    conn.commit()
-
-    cur.close()
-    conn.close()
+    update_player(player_id, {"paid": "Rejected"})
     return redirect("/admin")
 
 @app.route("/mark_played/<int:player_id>")
 def mark_played(player_id):
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("UPDATE players SET played='Yes' WHERE id=%s", (player_id,))
-    conn.commit()
-
-    cur.close()
-    conn.close()
+    update_player(player_id, {"played": "Yes"})
     return redirect("/admin")
 
 @app.route("/quick_kill/<int:player_id>")
 def quick_kill(player_id):
-    conn = get_db()
-    cur = conn.cursor()
+    data = load_data()
+    players = data.get("players", [])
 
-    cur.execute("UPDATE players SET kills = COALESCE(NULLIF(kills,''),'0')::int + 1 WHERE id=%s", (player_id,))
-    conn.commit()
+    for p in players:
+        if int(p.get("id")) == int(player_id):
+            p["kills"] = str(safe_int(p.get("kills")) + 1)
+            break
 
-    cur.close()
-    conn.close()
+    data["players"] = players
+    save_data(data)
+
     return redirect("/admin")
 
 @app.route("/set_rank/<int:player_id>/<rank>")
 def set_rank(player_id, rank):
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("UPDATE players SET rank=%s WHERE id=%s", (rank, player_id))
-    conn.commit()
-
-    cur.close()
-    conn.close()
+    update_player(player_id, {"rank": rank})
     return redirect("/admin")
 
 @app.route("/edit/<int:player_id>", methods=["GET", "POST"])
 def edit_player(player_id):
-    conn = get_db()
-    cur = conn.cursor()
+    data = load_data()
+    players = data.get("players", [])
+
+    player = None
+    for p in players:
+        if int(p.get("id")) == int(player_id):
+            player = p
+            break
+
+    if not player:
+        return redirect("/admin")
 
     if request.method == "POST":
-        cur.execute("""
-        UPDATE players
-        SET kills=%s, rank=%s, win_ratio=%s
-        WHERE id=%s
-        """, (
-            request.form.get("kills"),
-            request.form.get("rank"),
-            request.form.get("win_ratio"),
-            player_id
-        ))
-        conn.commit()
-        cur.close()
-        conn.close()
+        player["kills"] = request.form.get("kills", "0")
+        player["rank"] = request.form.get("rank", "")
+        player["win_ratio"] = request.form.get("win_ratio", "")
+
+        data["players"] = players
+        save_data(data)
+
         return redirect("/admin")
-
-    cur.execute("SELECT id, name, kills, rank, win_ratio FROM players WHERE id=%s", (player_id,))
-    row = cur.fetchone()
-
-    cur.close()
-    conn.close()
-
-    if not row:
-        return redirect("/admin")
-
-    player = {
-        "id": row[0],
-        "name": row[1],
-        "kills": row[2],
-        "rank": row[3],
-        "win_ratio": row[4]
-    }
 
     return render_template("edit.html", p=player)
 
 @app.route("/delete/<int:player_id>", methods=["POST"])
 def delete(player_id):
-    conn = get_db()
-    cur = conn.cursor()
+    data = load_data()
+    players = data.get("players", [])
 
-    cur.execute("DELETE FROM players WHERE id=%s", (player_id,))
-    conn.commit()
+    players = [p for p in players if int(p.get("id")) != int(player_id)]
 
-    cur.close()
-    conn.close()
+    data["players"] = players
+    save_data(data)
+
     return redirect("/admin")
 
 @app.route("/login", methods=["GET", "POST"])
