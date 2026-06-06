@@ -1,11 +1,82 @@
-[
-    {
-        "id": 0,
-        "name": "AARYAN KUMAR",
-        "uid": "23400616",
-        "phone": "7004596815",
-        "mode": "TDM",
-        "payment_ref": "7004596815",
-        "paid": "Pending"
-    }
-]
+{
+    "players": [
+        {
+            "id": 1,
+            "name": "AARYAM",
+            "uid": "2340061675",
+            "phone": "4060",
+            "mode": "TDM",
+            "payment_ref": "212121",
+            "paid": "Pending",
+            "played": "No",
+            "kills": "0",
+            "rank": "",
+            "win_ratio": ""
+        },
+        {
+            "id": 2,
+            "name": "CHANDAN",
+            "uid": "234000",
+            "phone": "1212",
+            "mode": "Erangel",
+            "payment_ref": "1CV1V",
+            "paid": "Pending",
+            "played": "No",
+            "kills": "0",
+            "rank": "",
+            "win_ratio": ""
+        },
+        {
+            "id": 3,
+            "name": "AKM",
+            "uid": "3030",
+            "phone": "5454",
+            "mode": "Solo",
+            "payment_ref": "D",
+            "paid": "Pending",
+            "played": "No",
+            "kills": "0",
+            "rank": "",
+            "win_ratio": ""
+        },
+        {
+            "id": 4,
+            "name": "DSDSDSD",
+            "uid": "DGFG",
+            "phone": "35356353",
+            "mode": "Mega Erangel",
+            "payment_ref": "553535",
+            "paid": "Pending",
+            "played": "No",
+            "kills": "0",
+            "rank": "",
+            "win_ratio": ""
+        },
+        {
+            "id": 5,
+            "name": "DFDFFG",
+            "uid": "FGFG",
+            "phone": "GFGFG",
+            "mode": "Mega TDM",
+            "payment_ref": "GFGF",
+            "paid": "Pending",
+            "played": "No",
+            "kills": "0",
+            "rank": "",
+            "win_ratio": ""
+        },
+        {
+            "id": 6,
+            "name": "ABDK",
+            "uid": "FDF",
+            "phone": "SFF",
+            "mode": "Mega Erangel",
+            "payment_ref": "DD",
+            "paid": "Pending",
+            "played": "No",
+            "kills": "0",
+            "rank": "",
+            "win_ratio": ""
+        }
+    ]
+}
